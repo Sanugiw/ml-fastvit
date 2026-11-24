@@ -59,7 +59,11 @@ def get_args():
     p.add_argument("--eval-interval", type=int, default=4000)
     p.add_argument("--eval-samples", type=int, default=None,
                    help="evaluate on a subset of val during training "
-                        "(full val is always used at the end)")
+                        "(full val is used at the end unless "
+                        "--final-eval-samples is set)")
+    p.add_argument("--final-eval-samples", type=int, default=None,
+                   help="val images for the final evaluation "
+                        "(default: all 2000; set small for debug runs)")
     p.add_argument("--train-samples", type=int, default=None,
                    help="use a subset of train (for quick debugging)")
     p.add_argument("--log-interval", type=int, default=50)
@@ -85,7 +89,11 @@ def evaluate(model, dataset, device, amp=False, max_samples=None):
     n = len(dataset) if max_samples is None else min(max_samples, len(dataset))
     hist = torch.zeros(NUM_CLASSES, NUM_CLASSES, dtype=torch.int64,
                        device=device)
+    t0 = time.time()
+    print(f"evaluating on {n} val images...", flush=True)
     for i in range(n):
+        if i and i % 250 == 0:
+            print(f"  eval {i}/{n} ({time.time() - t0:.0f}s)", flush=True)
         img, lbl = dataset[i]
         img = img.unsqueeze(0).to(device)
         lbl = lbl.to(device)
@@ -228,7 +236,8 @@ def main():
         if step % args.eval_interval == 0 or step == args.iters:
             final = step == args.iters
             m = evaluate(model, val_set, device, args.amp,
-                         None if final else args.eval_samples)
+                         args.final_eval_samples if final
+                         else args.eval_samples)
             print(f"[eval @ {step}] mIoU {m['mIoU']:.2f} aAcc {m['aAcc']:.2f} "
                   f"mAcc {m['mAcc']:.2f} ({m['num_images']} images)",
                   flush=True)
