@@ -28,6 +28,18 @@ from segmentation.train_seg import evaluate  # noqa: E402
 
 @torch.no_grad()
 def benchmark(model, device, size=512, warmup=10, runs=50):
+    """Measure the average forward-pass latency on a random input.
+
+    Args:
+        model: Model to benchmark.
+        device: Device to run on.
+        size: Side of the square input image. Default: ``512``
+        warmup: Number of untimed warmup runs. Default: ``10``
+        runs: Number of timed runs. Default: ``50``
+
+    Returns:
+        Mean latency per forward pass, in milliseconds (batch size 1).
+    """
     model.eval()
     x = torch.randn(1, 3, size, size, device=device)
     for _ in range(warmup):
@@ -43,6 +55,11 @@ def benchmark(model, device, size=512, warmup=10, runs=50):
 
 
 def main():
+    """Evaluate a trained segmentation checkpoint on ADE20K val.
+
+    Optionally re-parameterizes the model, benchmarks latency and saves
+    visualizations. Results are written to ``eval_results.json``.
+    """
     p = argparse.ArgumentParser()
     p.add_argument("--checkpoint", required=True, help="best.pth / last.pth")
     p.add_argument("--reparam", action="store_true",

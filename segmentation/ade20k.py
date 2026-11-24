@@ -52,23 +52,65 @@ CLASSES = (
 
 
 def load_hf_split(split: str, cache_dir: str = None):
+    """Load one split of ADE20K from the Hugging Face Hub.
+
+    Args:
+        split: ``train``, ``val`` or ``validation``.
+        cache_dir: Hugging Face datasets cache directory. ``None`` uses the
+            default cache. Default: ``None``
+
+    Returns:
+        Hugging Face ``Dataset`` with ``image`` and ``mask`` columns.
+    """
     from datasets import load_dataset
     split = {"val": "validation"}.get(split, split)
     return load_dataset(HF_DATASET, HF_CONFIG, split=split, cache_dir=cache_dir)
 
 
 def _rescale_keep_ratio(w: int, h: int, scale=(2048, 512)):
-    """mmseg `Resize(keep_ratio=True)`: fit long side <= scale[0] and short
-    side <= scale[1]."""
+    """Compute a keep-ratio resize, as mmseg's ``Resize(keep_ratio=True)``.
+
+    The image is scaled so that its long side is at most ``max(scale)`` and
+    its short side at most ``min(scale)``.
+
+    Args:
+        w: Image width.
+        h: Image height.
+        scale: Target ``(long, short)`` side limits. Default: ``(2048, 512)``
+
+    Returns:
+        New ``(width, height)``.
+    """
     long_s, short_s = max(scale), min(scale)
     factor = min(long_s / max(w, h), short_s / min(w, h))
     return int(w * factor + 0.5), int(h * factor + 0.5)
 
 
 class ADE20KSeg(Dataset):
+    """ADE20K semantic segmentation dataset with mmseg-style transforms.
+
+    Training samples: random rescale, random crop, horizontal flip,
+    photometric distortion, normalization and padding to ``crop_size``.
+    Validation samples: keep-ratio resize and normalization of the image only;
+    the label is returned at its original resolution.
+    """
+
     def __init__(self, hf_split, train: bool, crop_size: int = 512,
                  scale=(2048, 512), ratio_range=(0.5, 2.0),
-                 max_samples: int = None):
+                 max_samples: int = None) -> None:
+        """Build ADE20K dataset.
+
+        Args:
+            hf_split: Hugging Face split from :func:`load_hf_split`, or any
+                indexable of dicts with ``image`` and ``mask`` PIL images.
+            train: Apply training augmentations if ``True``.
+            crop_size: Side of the square training crop. Default: ``512``
+            scale: Base ``(long, short)`` resize limits. Default: ``(2048, 512)``
+            ratio_range: Range of the random rescale factor applied to
+                ``scale`` during training. Default: ``(0.5, 2.0)``
+            max_samples: Use only the first ``max_samples`` images. ``None``
+                uses all of them. Default: ``None``
+        """
         self.ds = hf_split
         self.n = len(hf_split) if max_samples is None else min(
             max_samples, len(hf_split))
@@ -80,11 +122,21 @@ class ADE20KSeg(Dataset):
         self.jitter = ColorJitter(brightness=32 / 255, contrast=0.5,
                                   saturation=0.5, hue=18 / 360)
 
-    def __len__(self):
+    def __len__(self) -> int:
+        """Return the number of samples."""
         return self.n
 
     @staticmethod
     def _to_label(mask: Image.Image) -> np.ndarray:
+        """Convert an ADE20K mask to training labels (``reduce_zero_label``).
+
+        Args:
+            mask: Mask where ``0`` is "other" and ``1..150`` are classes.
+
+        Returns:
+            ``uint8`` label map with classes ``0..149`` and ``IGNORE_INDEX``
+            for "other".
+        """
         m = np.array(mask, dtype=np.int64)
         if m.ndim == 3:
             m = m[..., 0]
@@ -93,6 +145,20 @@ class ADE20KSeg(Dataset):
         return m.astype(np.uint8)
 
     def _random_crop(self, img, lbl, cat_max_ratio=0.75, tries=10):
+        """Randomly crop image and label, as mmseg's ``RandomCrop``.
+
+        Crops dominated by a single class are re-drawn, up to ``tries`` times.
+
+        Args:
+            img: Image array of shape ``(H, W, 3)``.
+            lbl: Label array of shape ``(H, W)``.
+            cat_max_ratio: Maximum fraction of the crop's labeled pixels a
+                single class may occupy. Default: ``0.75``
+            tries: Maximum number of crops to draw. Default: ``10``
+
+        Returns:
+            Cropped ``(img, lbl)``, at most ``crop_size`` on each side.
+        """
         h, w = lbl.shape
         ch, cw = min(self.crop, h), min(self.crop, w)
         for _ in range(tries):
@@ -106,6 +172,17 @@ class ADE20KSeg(Dataset):
         return img[y:y + ch, x:x + cw], crop_lbl
 
     def __getitem__(self, idx):
+        """Load and transform one sample.
+
+        Args:
+            idx: Sample index.
+
+        Returns:
+            Tuple of image tensor ``(3, H, W)`` (float, normalized) and label
+            tensor ``(H, W)`` (int64). For training both are
+            ``crop_size x crop_size``; for validation the label keeps the
+            original resolution.
+        """
         row = self.ds[idx]
         img = row["image"].convert("RGB")
         lbl = self._to_label(row["mask"])
@@ -151,9 +228,25 @@ PALETTE[IGNORE_INDEX] = 0
 
 
 def colorize(label: np.ndarray) -> np.ndarray:
+    """Map a label map to RGB colors for visualization.
+
+    Args:
+        label: Label map of shape ``(H, W)``.
+
+    Returns:
+        ``uint8`` RGB image of shape ``(H, W, 3)``.
+    """
     return PALETTE[label.astype(np.int64)]
 
 
 def denormalize(img: torch.Tensor) -> np.ndarray:
+    """Undo ImageNet normalization for visualization.
+
+    Args:
+        img: Normalized image tensor of shape ``(3, H, W)``.
+
+    Returns:
+        ``uint8`` RGB image of shape ``(H, W, 3)``.
+    """
     x = img.permute(1, 2, 0).cpu().numpy() * STD + MEAN
     return (np.clip(x, 0, 1) * 255).astype(np.uint8)

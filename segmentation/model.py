@@ -42,7 +42,19 @@ DISTILLED_CHECKPOINT_URLS = {
 
 
 def build_backbone(variant: str, drop_path_rate: float = 0.0) -> nn.Module:
-    """FastViT that returns the 4 stage feature maps (strides 4, 8, 16, 32)."""
+    """Build a FastViT backbone that outputs multi-scale feature maps.
+
+    The model is created with ``fork_feat=True``, so instead of class logits it
+    returns the (normalized) output of each of its 4 stages, at strides 4, 8, 16
+    and 32 w.r.t. the input.
+
+    Args:
+        variant: FastViT variant name, one of ``VARIANTS``.
+        drop_path_rate: Stochastic depth rate. Default: ``0.0``
+
+    Returns:
+        FastViT backbone module.
+    """
     if variant not in VARIANTS:
         raise ValueError(f"Unknown variant {variant}. Choose from {VARIANTS}")
     # Call the constructor directly instead of timm.create_model: recent timm
@@ -54,6 +66,18 @@ def build_backbone(variant: str, drop_path_rate: float = 0.0) -> nn.Module:
 
 
 def _read_state_dict(path_or_url: str) -> Dict[str, torch.Tensor]:
+    """Read a state dict from a local checkpoint file or a URL.
+
+    Handles checkpoints that wrap the weights under ``state_dict``, ``model``
+    or ``state_dict_ema`` keys, and strips the ``module.`` prefix left by
+    DataParallel / DistributedDataParallel.
+
+    Args:
+        path_or_url: Local file path or ``http(s)`` URL of the checkpoint.
+
+    Returns:
+        Mapping from parameter / buffer name to tensor.
+    """
     if path_or_url.startswith("http"):
         ckpt = torch.hub.load_state_dict_from_url(
             path_or_url, map_location="cpu", check_hash=False
@@ -70,8 +94,18 @@ def _read_state_dict(path_or_url: str) -> Dict[str, torch.Tensor]:
 def load_imagenet_weights(backbone: nn.Module, path_or_url: str) -> None:
     """Load an *unfused* ImageNet classification checkpoint into the backbone.
 
-    The classifier head (conv_exp, head) is dropped; the per-stage output norms
-    (norm*) are new and stay randomly initialised.
+    The classifier head (``conv_exp``, ``head``) is dropped. The per-stage
+    output norms (``norm*``) do not exist in the classification model, so they
+    stay randomly initialized.
+
+    Args:
+        backbone: Backbone built with :func:`build_backbone`.
+        path_or_url: Local file path or URL of the unfused checkpoint.
+
+    Raises:
+        ValueError: If the checkpoint is a re-parameterized (fused) one.
+        RuntimeError: If backbone weights are missing from the checkpoint,
+            e.g. when the checkpoint belongs to a different variant.
     """
     state_dict = _read_state_dict(path_or_url)
     if any("reparam_conv" in k for k in state_dict):
@@ -101,7 +135,16 @@ def load_imagenet_weights(backbone: nn.Module, path_or_url: str) -> None:
 
 
 class ConvBNReLU(nn.Sequential):
-    def __init__(self, in_ch: int, out_ch: int, k: int = 3):
+    """Convolution followed by BatchNorm and ReLU."""
+
+    def __init__(self, in_ch: int, out_ch: int, k: int = 3) -> None:
+        """Build a conv-BN-ReLU block.
+
+        Args:
+            in_ch: Number of input channels.
+            out_ch: Number of output channels.
+            k: Kernel size. Padding keeps the spatial size. Default: ``3``
+        """
         super().__init__(
             nn.Conv2d(in_ch, out_ch, k, padding=k // 2, bias=False),
             nn.BatchNorm2d(out_ch),
@@ -110,9 +153,23 @@ class ConvBNReLU(nn.Sequential):
 
 
 class FPNNeck(nn.Module):
-    """Feature Pyramid Network (same as mmseg `FPN`, no extra levels)."""
+    """Feature Pyramid Network neck.
 
-    def __init__(self, in_channels: List[int], out_channels: int = 256):
+    For more details refer to:
+    `Feature Pyramid Networks for Object Detection <https://arxiv.org/abs/1612.03144>`_
+
+    Equivalent to mmseg's ``FPN`` without extra output levels.
+    """
+
+    def __init__(self, in_channels: List[int], out_channels: int = 256) -> None:
+        """Build FPN neck.
+
+        Args:
+            in_channels: Number of channels of each backbone stage, from the
+                finest (stride 4) to the coarsest (stride 32) level.
+            out_channels: Number of channels of every output level.
+                Default: ``256``
+        """
         super().__init__()
         self.lateral = nn.ModuleList(
             nn.Conv2d(c, out_channels, 1) for c in in_channels
@@ -123,6 +180,19 @@ class FPNNeck(nn.Module):
         )
 
     def forward(self, feats: List[torch.Tensor]) -> List[torch.Tensor]:
+        """Apply forward pass.
+
+        Projects every level to ``out_channels`` with a 1x1 conv, adds the
+        upsampled coarser level to each finer level (top-down pathway) and
+        smooths each result with a 3x3 conv.
+
+        Args:
+            feats: Backbone feature maps, finest level first.
+
+        Returns:
+            Feature maps with ``out_channels`` channels, same resolutions as
+            the inputs.
+        """
         lat = [l(f) for l, f in zip(self.lateral, feats)]
         for i in range(len(lat) - 1, 0, -1):
             lat[i - 1] = lat[i - 1] + F.interpolate(
@@ -132,12 +202,28 @@ class FPNNeck(nn.Module):
 
 
 class SemanticFPNHead(nn.Module):
-    """Semantic FPN head (mmseg `FPNHead`): upsample every level to stride 4,
-    sum, then classify."""
+    """Semantic FPN decode head.
+
+    For more details refer to:
+    `Panoptic Feature Pyramid Networks <https://arxiv.org/abs/1901.02446>`_
+
+    Equivalent to mmseg's ``FPNHead``: every pyramid level is brought to
+    stride 4 with conv + 2x upsampling stages, the levels are summed and a 1x1
+    conv predicts per-pixel class logits.
+    """
 
     def __init__(self, in_channels: int = 256, channels: int = 128,
                  num_classes: int = 150, num_levels: int = 4,
-                 dropout: float = 0.1):
+                 dropout: float = 0.1) -> None:
+        """Build Semantic FPN head.
+
+        Args:
+            in_channels: Number of channels of each FPN level. Default: ``256``
+            channels: Number of intermediate channels. Default: ``128``
+            num_classes: Number of segmentation classes. Default: ``150``
+            num_levels: Number of pyramid levels. Default: ``4``
+            dropout: Dropout rate before the classifier. Default: ``0.1``
+        """
         super().__init__()
         self.scale_heads = nn.ModuleList()
         for i in range(num_levels):
@@ -155,6 +241,14 @@ class SemanticFPNHead(nn.Module):
         nn.init.zeros_(self.cls.bias)
 
     def forward(self, feats: List[torch.Tensor]) -> torch.Tensor:
+        """Apply forward pass.
+
+        Args:
+            feats: FPN feature maps, finest (stride 4) level first.
+
+        Returns:
+            Class logits at stride 4, shape ``(B, num_classes, H/4, W/4)``.
+        """
         out = self.scale_heads[0](feats[0])
         for i in range(1, len(feats)):
             out = out + F.interpolate(
@@ -165,8 +259,26 @@ class SemanticFPNHead(nn.Module):
 
 
 class FastViTSemanticFPN(nn.Module):
+    """FastViT backbone with a Semantic FPN decoder for semantic segmentation.
+
+    Pipeline: FastViT (4 stages) -> :class:`FPNNeck` -> :class:`SemanticFPNHead`
+    -> bilinear upsampling to the input resolution.
+    """
+
     def __init__(self, variant: str = "fastvit_sa12", num_classes: int = 150,
-                 pretrained: str = None, drop_path_rate: float = 0.0):
+                 pretrained: str = None, drop_path_rate: float = 0.0) -> None:
+        """Build segmentation model.
+
+        Args:
+            variant: FastViT variant name, one of ``VARIANTS``.
+                Default: ``fastvit_sa12``
+            num_classes: Number of segmentation classes. Default: ``150``
+            pretrained: Path or URL of an unfused ImageNet checkpoint for the
+                backbone. ``None`` keeps random initialization.
+                Default: ``None``
+            drop_path_rate: Stochastic depth rate of the backbone.
+                Default: ``0.0``
+        """
         super().__init__()
         self.variant = variant
         self.backbone = build_backbone(variant, drop_path_rate)
@@ -180,7 +292,15 @@ class FastViTSemanticFPN(nn.Module):
         self.decode_head = SemanticFPNHead(256, 128, num_classes, len(chans))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Returns logits at the input resolution: (B, num_classes, H, W)."""
+        """Apply forward pass.
+
+        Args:
+            x: Normalized input images of shape ``(B, 3, H, W)``.
+
+        Returns:
+            Class logits at the input resolution, shape
+            ``(B, num_classes, H, W)``.
+        """
         logits = self.decode_head(self.neck(self.backbone(x)))
         return F.interpolate(logits, size=x.shape[-2:], mode="bilinear",
                              align_corners=False)
@@ -188,5 +308,13 @@ class FastViTSemanticFPN(nn.Module):
 
 def reparameterize(model: nn.Module) -> nn.Module:
     """Fuse FastViT's train-time branches (structural reparameterization).
-    Returns a new model; call on a model in eval mode."""
+
+    The original model is left unchanged.
+
+    Args:
+        model: Trained model, in eval mode.
+
+    Returns:
+        A re-parameterized copy of the model for inference.
+    """
     return reparameterize_model(model)

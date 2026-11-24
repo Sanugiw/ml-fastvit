@@ -35,6 +35,11 @@ from segmentation.model import (  # noqa: E402
 
 
 def get_args():
+    """Parse command line arguments.
+
+    Returns:
+        Parsed arguments namespace.
+    """
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawTextHelpFormatter)
     p.add_argument("--model", default="fastvit_sa12", choices=VARIANTS)
@@ -76,6 +81,21 @@ def get_args():
 
 
 def poly_lr(base_lr, it, total, warmup, power=0.9, min_lr=0.0):
+    """Compute the learning rate of a poly schedule with optional linear warmup.
+
+    ``lr = (base_lr - min_lr) * (1 - it / total) ** power + min_lr``
+
+    Args:
+        base_lr: Peak learning rate.
+        it: Current iteration (0-based).
+        total: Total number of iterations.
+        warmup: Number of linear warmup iterations, ``0`` to disable.
+        power: Poly decay power. Default: ``0.9``
+        min_lr: Final learning rate. Default: ``0.0``
+
+    Returns:
+        Learning rate for iteration ``it``.
+    """
     if warmup and it < warmup:
         return base_lr * (it + 1) / warmup
     return (base_lr - min_lr) * (1 - it / total) ** power + min_lr
@@ -83,8 +103,26 @@ def poly_lr(base_lr, it, total, warmup, power=0.9, min_lr=0.0):
 
 @torch.no_grad()
 def evaluate(model, dataset, device, amp=False, max_samples=None):
-    """Whole-image inference, batch size 1. Returns aAcc, mIoU, mAcc and
-    per-class IoU, computed on the original-resolution labels."""
+    """Evaluate semantic segmentation metrics on a dataset.
+
+    Runs whole-image inference with batch size 1 and compares predictions with
+    the original-resolution labels, accumulating a confusion matrix. Classes
+    absent from both ground truth and predictions are ignored in the means
+    (as in mmseg).
+
+    Args:
+        model: Segmentation model returning logits of shape
+            ``(B, num_classes, H, W)``.
+        dataset: Validation :class:`ADE20KSeg` dataset (``train=False``).
+        device: Device to run inference on.
+        amp: Use mixed precision on CUDA. Default: ``False``
+        max_samples: Evaluate only the first ``max_samples`` images. ``None``
+            uses the whole dataset. Default: ``None``
+
+    Returns:
+        Dict with ``aAcc``, ``mIoU`` and ``mAcc`` (in %), ``per_class_iou``
+        (class name -> IoU in %, or ``None`` if undefined) and ``num_images``.
+    """
     model.eval()
     n = len(dataset) if max_samples is None else min(max_samples, len(dataset))
     hist = torch.zeros(NUM_CLASSES, NUM_CLASSES, dtype=torch.int64,
@@ -124,7 +162,18 @@ def evaluate(model, dataset, device, amp=False, max_samples=None):
 
 
 def param_groups(model, weight_decay):
-    """No weight decay on norms, biases, layer-scale and positional params."""
+    """Split parameters into optimizer groups with and without weight decay.
+
+    Weight decay is not applied to 1-D parameters (norm weights, biases) or
+    layer-scale parameters.
+
+    Args:
+        model: Model whose trainable parameters are grouped.
+        weight_decay: Weight decay of the decayed group.
+
+    Returns:
+        List of two parameter-group dicts for ``torch.optim`` optimizers.
+    """
     decay, no_decay = [], []
     for name, p in model.named_parameters():
         if not p.requires_grad:
@@ -138,12 +187,21 @@ def param_groups(model, weight_decay):
 
 
 def infinite(loader):
+    """Iterate over a data loader indefinitely, reshuffling every epoch.
+
+    Args:
+        loader: PyTorch ``DataLoader``.
+
+    Yields:
+        Batches from ``loader``.
+    """
     while True:
         for batch in loader:
             yield batch
 
 
 def main():
+    """Train the segmentation model and evaluate it periodically."""
     args = get_args()
     random.seed(args.seed)
     np.random.seed(args.seed)
@@ -191,6 +249,12 @@ def main():
         log.writerow(["iter", "loss", "lr", "mIoU", "aAcc", "mAcc", "time_s"])
 
     def save(name, it):
+        """Save a resumable checkpoint to the output directory.
+
+        Args:
+            name: File name, e.g. ``last.pth`` or ``best.pth``.
+            it: Number of completed iterations.
+        """
         torch.save({"model": model.state_dict(), "optimizer": opt.state_dict(),
                     "scaler": scaler.state_dict(), "iter": it,
                     "best_miou": best, "variant": args.model,
