@@ -1,0 +1,42 @@
+/home/sanugi/ml-fastvit/segmentation/.venv/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/sanugi/ml-fastvit/segmentation/.venv/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/sanugi/ml-fastvit/models/fastvit.py:964: UserWarning: Overwriting fastvit_t8 in registry with models.fastvit.fastvit_t8. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t8(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:986: UserWarning: Overwriting fastvit_t12 in registry with models.fastvit.fastvit_t12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1008: UserWarning: Overwriting fastvit_s12 in registry with models.fastvit.fastvit_s12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_s12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1030: UserWarning: Overwriting fastvit_sa12 in registry with models.fastvit.fastvit_sa12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1054: UserWarning: Overwriting fastvit_sa24 in registry with models.fastvit.fastvit_sa24. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa24(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1078: UserWarning: Overwriting fastvit_sa36 in registry with models.fastvit.fastvit_sa36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa36(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1103: UserWarning: Overwriting fastvit_ma36 in registry with models.fastvit.fastvit_ma36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_ma36(pretrained=False, **kwargs):
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+If for semantic segmentation, please install mmsegmentation first
+If for detection, please install mmdetection first
+evaluating on 2000 val images...
+  eval 250/2000 (7s)
+  eval 500/2000 (14s)
+  eval 750/2000 (20s)
+  eval 1000/2000 (26s)
+  eval 1250/2000 (33s)
+  eval 1500/2000 (39s)
+  eval 1750/2000 (45s)
+[unfused] mIoU 43.00 aAcc 80.53 mAcc 55.02
+params: unfused 14.66M -> fused 14.63M
+evaluating on 2000 val images...
+  eval 250/2000 (5s)
+  eval 500/2000 (10s)
+  eval 750/2000 (15s)
+  eval 1000/2000 (20s)
+  eval 1250/2000 (25s)
+  eval 1500/2000 (30s)
+  eval 1750/2000 (35s)
+[fused]   mIoU 43.00 aAcc 80.53 mAcc 55.02
+latency @512x512 on cuda: unfused 9.8 ms, fused 6.1 ms
+saved 8 visualisations to /home/sanugi/ml-fastvit/segmentation/runs/fastvit_sa12/vis

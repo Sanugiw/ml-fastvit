@@ -1,0 +1,928 @@
+/home/sanugi/ml-fastvit/.venv/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/sanugi/ml-fastvit/.venv/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/sanugi/ml-fastvit/models/fastvit.py:964: UserWarning: Overwriting fastvit_t8 in registry with models.fastvit.fastvit_t8. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t8(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:986: UserWarning: Overwriting fastvit_t12 in registry with models.fastvit.fastvit_t12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1008: UserWarning: Overwriting fastvit_s12 in registry with models.fastvit.fastvit_s12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_s12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1030: UserWarning: Overwriting fastvit_sa12 in registry with models.fastvit.fastvit_sa12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1054: UserWarning: Overwriting fastvit_sa24 in registry with models.fastvit.fastvit_sa24. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa24(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1078: UserWarning: Overwriting fastvit_sa36 in registry with models.fastvit.fastvit_sa36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa36(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1103: UserWarning: Overwriting fastvit_ma36 in registry with models.fastvit.fastvit_ma36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_ma36(pretrained=False, **kwargs):
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+If for semantic segmentation, please install mmsegmentation first
+If for detection, please install mmdetection first
+device: cuda
+[backbone] loaded 486/506 tensors from checkpoints/fastvit_sa12.pth.tar
+[backbone] skipped from checkpoint (classifier head): 18 tensors, e.g. ['conv_exp.rbr_conv.0.bn.bias', 'conv_exp.rbr_conv.0.bn.num_batches_tracked', 'conv_exp.rbr_conv.0.bn.running_mean']
+fastvit_sa12 + Semantic FPN: 14.66M params
+train images: 20210, val images: 2000
+iter 50/40000 loss 3.5072 lr 2.00e-04 elapsed 0.8m eta 10.96h
+iter 100/40000 loss 2.3795 lr 2.00e-04 elapsed 1.6m eta 10.78h
+iter 150/40000 loss 2.1027 lr 1.99e-04 elapsed 2.4m eta 10.74h
+iter 200/40000 loss 1.9687 lr 1.99e-04 elapsed 3.2m eta 10.70h
+iter 250/40000 loss 1.8809 lr 1.99e-04 elapsed 4.0m eta 10.66h
+iter 300/40000 loss 1.8160 lr 1.99e-04 elapsed 4.8m eta 10.65h
+iter 350/40000 loss 1.7596 lr 1.98e-04 elapsed 5.6m eta 10.62h
+iter 400/40000 loss 1.6625 lr 1.98e-04 elapsed 6.1m eta 10.07h
+iter 450/40000 loss 1.6476 lr 1.98e-04 elapsed 6.5m eta 9.57h
+iter 500/40000 loss 1.5787 lr 1.98e-04 elapsed 7.1m eta 9.38h
+iter 550/40000 loss 1.5835 lr 1.98e-04 elapsed 7.9m eta 9.45h
+iter 600/40000 loss 1.5605 lr 1.97e-04 elapsed 8.7m eta 9.50h
+iter 650/40000 loss 1.5169 lr 1.97e-04 elapsed 9.5m eta 9.54h
+iter 700/40000 loss 1.4594 lr 1.97e-04 elapsed 10.2m eta 9.58h
+iter 750/40000 loss 1.5059 lr 1.97e-04 elapsed 11.0m eta 9.62h
+iter 800/40000 loss 1.4520 lr 1.96e-04 elapsed 11.8m eta 9.65h
+iter 850/40000 loss 1.4568 lr 1.96e-04 elapsed 12.6m eta 9.67h
+iter 900/40000 loss 1.3766 lr 1.96e-04 elapsed 13.4m eta 9.70h
+iter 950/40000 loss 1.3259 lr 1.96e-04 elapsed 14.2m eta 9.72h
+iter 1000/40000 loss 1.3695 lr 1.95e-04 elapsed 15.0m eta 9.73h
+iter 1050/40000 loss 1.3464 lr 1.95e-04 elapsed 15.8m eta 9.75h
+iter 1100/40000 loss 1.3401 lr 1.95e-04 elapsed 16.6m eta 9.76h
+iter 1150/40000 loss 1.3576 lr 1.95e-04 elapsed 17.4m eta 9.77h
+iter 1200/40000 loss 1.2968 lr 1.95e-04 elapsed 18.2m eta 9.78h
+iter 1250/40000 loss 1.3091 lr 1.94e-04 elapsed 19.0m eta 9.79h
+iter 1300/40000 loss 1.2921 lr 1.94e-04 elapsed 19.8m eta 9.80h
+iter 1350/40000 loss 1.2322 lr 1.94e-04 elapsed 20.6m eta 9.81h
+iter 1400/40000 loss 1.2310 lr 1.94e-04 elapsed 21.4m eta 9.81h
+iter 1450/40000 loss 1.2076 lr 1.93e-04 elapsed 22.2m eta 9.82h
+iter 1500/40000 loss 1.2693 lr 1.93e-04 elapsed 23.0m eta 9.82h
+iter 1550/40000 loss 1.2904 lr 1.93e-04 elapsed 23.8m eta 9.82h
+iter 1600/40000 loss 1.2474 lr 1.93e-04 elapsed 24.3m eta 9.74h
+iter 1650/40000 loss 1.2126 lr 1.93e-04 elapsed 24.8m eta 9.60h
+iter 1700/40000 loss 1.1960 lr 1.92e-04 elapsed 25.3m eta 9.50h
+iter 1750/40000 loss 1.2102 lr 1.92e-04 elapsed 26.0m eta 9.48h
+iter 1800/40000 loss 1.1767 lr 1.92e-04 elapsed 26.8m eta 9.48h
+iter 1850/40000 loss 1.2339 lr 1.92e-04 elapsed 27.6m eta 9.47h
+iter 1900/40000 loss 1.2130 lr 1.91e-04 elapsed 28.3m eta 9.47h
+iter 1950/40000 loss 1.1467 lr 1.91e-04 elapsed 29.1m eta 9.47h
+iter 2000/40000 loss 1.2062 lr 1.91e-04 elapsed 29.9m eta 9.47h
+evaluating on 500 val images...
+  eval 250/500 (11s)
+[eval @ 2000] mIoU 22.23 aAcc 74.01 mAcc 31.35 (500 images)
+iter 2050/40000 loss 1.1517 lr 1.91e-04 elapsed 31.0m eta 9.58h
+iter 2100/40000 loss 1.1445 lr 1.91e-04 elapsed 31.8m eta 9.57h
+iter 2150/40000 loss 1.1352 lr 1.90e-04 elapsed 32.6m eta 9.56h
+iter 2200/40000 loss 1.1211 lr 1.90e-04 elapsed 33.4m eta 9.55h
+iter 2250/40000 loss 1.1005 lr 1.90e-04 elapsed 34.1m eta 9.54h
+iter 2300/40000 loss 1.0987 lr 1.90e-04 elapsed 34.9m eta 9.54h
+iter 2350/40000 loss 1.0937 lr 1.89e-04 elapsed 35.7m eta 9.53h
+iter 2400/40000 loss 1.1227 lr 1.89e-04 elapsed 36.5m eta 9.53h
+iter 2450/40000 loss 1.0990 lr 1.89e-04 elapsed 37.3m eta 9.52h
+iter 2500/40000 loss 1.1581 lr 1.89e-04 elapsed 38.1m eta 9.52h
+iter 2550/40000 loss 1.1124 lr 1.88e-04 elapsed 38.9m eta 9.52h
+iter 2600/40000 loss 1.0510 lr 1.88e-04 elapsed 39.7m eta 9.51h
+iter 2650/40000 loss 1.1104 lr 1.88e-04 elapsed 40.3m eta 9.46h
+iter 2700/40000 loss 1.0450 lr 1.88e-04 elapsed 40.7m eta 9.37h
+iter 2750/40000 loss 1.0310 lr 1.88e-04 elapsed 41.2m eta 9.31h
+iter 2800/40000 loss 1.0804 lr 1.87e-04 elapsed 42.0m eta 9.29h
+iter 2850/40000 loss 1.0616 lr 1.87e-04 elapsed 42.7m eta 9.28h
+iter 2900/40000 loss 1.0969 lr 1.87e-04 elapsed 43.5m eta 9.28h
+iter 2950/40000 loss 1.0545 lr 1.87e-04 elapsed 44.3m eta 9.27h
+iter 3000/40000 loss 1.0555 lr 1.86e-04 elapsed 45.1m eta 9.26h
+iter 3050/40000 loss 1.0684 lr 1.86e-04 elapsed 45.9m eta 9.26h
+iter 3100/40000 loss 1.0755 lr 1.86e-04 elapsed 46.6m eta 9.25h
+iter 3150/40000 loss 1.0686 lr 1.86e-04 elapsed 47.4m eta 9.25h
+iter 3200/40000 loss 1.0036 lr 1.86e-04 elapsed 48.2m eta 9.24h
+iter 3250/40000 loss 0.9785 lr 1.85e-04 elapsed 49.0m eta 9.23h
+iter 3300/40000 loss 1.0317 lr 1.85e-04 elapsed 49.8m eta 9.23h
+iter 3350/40000 loss 1.0102 lr 1.85e-04 elapsed 50.6m eta 9.22h
+iter 3400/40000 loss 1.0473 lr 1.85e-04 elapsed 51.4m eta 9.21h
+iter 3450/40000 loss 1.0438 lr 1.84e-04 elapsed 52.1m eta 9.21h
+iter 3500/40000 loss 1.0305 lr 1.84e-04 elapsed 52.9m eta 9.20h
+iter 3550/40000 loss 1.0221 lr 1.84e-04 elapsed 53.7m eta 9.20h
+iter 3600/40000 loss 1.0389 lr 1.84e-04 elapsed 54.6m eta 9.19h
+iter 3650/40000 loss 1.0008 lr 1.84e-04 elapsed 55.4m eta 9.19h
+iter 3700/40000 loss 1.0380 lr 1.83e-04 elapsed 56.2m eta 9.18h
+iter 3750/40000 loss 0.9668 lr 1.83e-04 elapsed 57.0m eta 9.18h
+iter 3800/40000 loss 0.9862 lr 1.83e-04 elapsed 57.7m eta 9.17h
+iter 3850/40000 loss 0.9739 lr 1.83e-04 elapsed 58.2m eta 9.10h
+iter 3900/40000 loss 0.9718 lr 1.82e-04 elapsed 58.6m eta 9.04h
+iter 3950/40000 loss 0.9984 lr 1.82e-04 elapsed 59.0m eta 8.98h
+iter 4000/40000 loss 0.9554 lr 1.82e-04 elapsed 59.5m eta 8.92h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 4000] mIoU 27.45 aAcc 75.36 mAcc 37.93 (500 images)
+iter 4050/40000 loss 0.9604 lr 1.82e-04 elapsed 60.1m eta 8.90h
+iter 4100/40000 loss 0.9991 lr 1.81e-04 elapsed 60.6m eta 8.84h
+iter 4150/40000 loss 0.9998 lr 1.81e-04 elapsed 61.0m eta 8.78h
+iter 4200/40000 loss 1.0067 lr 1.81e-04 elapsed 61.4m eta 8.73h
+iter 4250/40000 loss 0.9710 lr 1.81e-04 elapsed 61.9m eta 8.67h
+iter 4300/40000 loss 0.9685 lr 1.81e-04 elapsed 62.3m eta 8.62h
+iter 4350/40000 loss 0.9644 lr 1.80e-04 elapsed 62.7m eta 8.57h
+iter 4400/40000 loss 0.9810 lr 1.80e-04 elapsed 63.1m eta 8.52h
+iter 4450/40000 loss 0.9286 lr 1.80e-04 elapsed 63.6m eta 8.47h
+iter 4500/40000 loss 0.9617 lr 1.80e-04 elapsed 64.0m eta 8.42h
+iter 4550/40000 loss 0.9618 lr 1.79e-04 elapsed 64.4m eta 8.37h
+iter 4600/40000 loss 0.9545 lr 1.79e-04 elapsed 64.9m eta 8.32h
+iter 4650/40000 loss 0.9614 lr 1.79e-04 elapsed 65.3m eta 8.27h
+iter 4700/40000 loss 0.9445 lr 1.79e-04 elapsed 65.7m eta 8.23h
+iter 4750/40000 loss 0.9353 lr 1.78e-04 elapsed 66.2m eta 8.18h
+iter 4800/40000 loss 0.9664 lr 1.78e-04 elapsed 66.6m eta 8.14h
+iter 4850/40000 loss 0.9415 lr 1.78e-04 elapsed 67.0m eta 8.10h
+iter 4900/40000 loss 0.9538 lr 1.78e-04 elapsed 67.5m eta 8.05h
+iter 4950/40000 loss 0.9324 lr 1.78e-04 elapsed 67.9m eta 8.01h
+iter 5000/40000 loss 0.9490 lr 1.77e-04 elapsed 68.3m eta 7.97h
+iter 5050/40000 loss 0.9293 lr 1.77e-04 elapsed 68.7m eta 7.93h
+iter 5100/40000 loss 0.9018 lr 1.77e-04 elapsed 69.2m eta 7.89h
+iter 5150/40000 loss 0.9182 lr 1.77e-04 elapsed 69.6m eta 7.85h
+iter 5200/40000 loss 0.9101 lr 1.76e-04 elapsed 70.0m eta 7.81h
+iter 5250/40000 loss 0.9142 lr 1.76e-04 elapsed 70.5m eta 7.77h
+iter 5300/40000 loss 0.8957 lr 1.76e-04 elapsed 70.9m eta 7.74h
+iter 5350/40000 loss 0.9075 lr 1.76e-04 elapsed 71.3m eta 7.70h
+iter 5400/40000 loss 0.9296 lr 1.76e-04 elapsed 71.8m eta 7.66h
+iter 5450/40000 loss 0.9653 lr 1.75e-04 elapsed 72.2m eta 7.63h
+iter 5500/40000 loss 0.9584 lr 1.75e-04 elapsed 72.6m eta 7.59h
+iter 5550/40000 loss 0.9190 lr 1.75e-04 elapsed 73.1m eta 7.56h
+iter 5600/40000 loss 0.9173 lr 1.75e-04 elapsed 73.5m eta 7.52h
+iter 5650/40000 loss 0.9037 lr 1.74e-04 elapsed 73.9m eta 7.49h
+iter 5700/40000 loss 0.8942 lr 1.74e-04 elapsed 74.4m eta 7.46h
+iter 5750/40000 loss 0.8972 lr 1.74e-04 elapsed 74.8m eta 7.42h
+iter 5800/40000 loss 0.8718 lr 1.74e-04 elapsed 75.2m eta 7.39h
+iter 5850/40000 loss 0.9051 lr 1.73e-04 elapsed 75.6m eta 7.36h
+iter 5900/40000 loss 0.8718 lr 1.73e-04 elapsed 76.1m eta 7.33h
+iter 5950/40000 loss 0.9087 lr 1.73e-04 elapsed 76.5m eta 7.30h
+iter 6000/40000 loss 0.8933 lr 1.73e-04 elapsed 76.9m eta 7.27h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 6000] mIoU 30.77 aAcc 76.12 mAcc 43.02 (500 images)
+iter 6050/40000 loss 0.9209 lr 1.73e-04 elapsed 77.6m eta 7.26h
+iter 6100/40000 loss 0.9353 lr 1.72e-04 elapsed 78.0m eta 7.23h
+iter 6150/40000 loss 0.8638 lr 1.72e-04 elapsed 78.5m eta 7.20h
+iter 6200/40000 loss 0.8739 lr 1.72e-04 elapsed 78.9m eta 7.17h
+iter 6250/40000 loss 0.8791 lr 1.72e-04 elapsed 79.3m eta 7.14h
+iter 6300/40000 loss 0.8831 lr 1.71e-04 elapsed 79.8m eta 7.11h
+iter 6350/40000 loss 0.8793 lr 1.71e-04 elapsed 80.2m eta 7.08h
+iter 6400/40000 loss 0.8716 lr 1.71e-04 elapsed 80.6m eta 7.05h
+iter 6450/40000 loss 0.8631 lr 1.71e-04 elapsed 81.1m eta 7.03h
+iter 6500/40000 loss 0.8469 lr 1.71e-04 elapsed 81.5m eta 7.00h
+iter 6550/40000 loss 0.8673 lr 1.70e-04 elapsed 81.9m eta 6.97h
+iter 6600/40000 loss 0.8873 lr 1.70e-04 elapsed 82.3m eta 6.95h
+iter 6650/40000 loss 0.8878 lr 1.70e-04 elapsed 82.8m eta 6.92h
+iter 6700/40000 loss 0.8762 lr 1.70e-04 elapsed 83.2m eta 6.89h
+iter 6750/40000 loss 0.8614 lr 1.69e-04 elapsed 83.6m eta 6.87h
+iter 6800/40000 loss 0.8641 lr 1.69e-04 elapsed 84.1m eta 6.84h
+iter 6850/40000 loss 0.8728 lr 1.69e-04 elapsed 84.5m eta 6.81h
+iter 6900/40000 loss 0.8707 lr 1.69e-04 elapsed 84.9m eta 6.79h
+iter 6950/40000 loss 0.8617 lr 1.68e-04 elapsed 85.4m eta 6.77h
+iter 7000/40000 loss 0.8255 lr 1.68e-04 elapsed 85.8m eta 6.74h
+iter 7050/40000 loss 0.8352 lr 1.68e-04 elapsed 86.2m eta 6.72h
+iter 7100/40000 loss 0.7998 lr 1.68e-04 elapsed 86.7m eta 6.69h
+iter 7150/40000 loss 0.8364 lr 1.68e-04 elapsed 87.1m eta 6.67h
+iter 7200/40000 loss 0.8621 lr 1.67e-04 elapsed 87.5m eta 6.64h
+iter 7250/40000 loss 0.8647 lr 1.67e-04 elapsed 87.9m eta 6.62h
+iter 7300/40000 loss 0.8677 lr 1.67e-04 elapsed 88.4m eta 6.60h
+iter 7350/40000 loss 0.8958 lr 1.67e-04 elapsed 88.8m eta 6.57h
+iter 7400/40000 loss 0.8242 lr 1.66e-04 elapsed 89.2m eta 6.55h
+iter 7450/40000 loss 0.8360 lr 1.66e-04 elapsed 89.7m eta 6.53h
+iter 7500/40000 loss 0.8435 lr 1.66e-04 elapsed 90.1m eta 6.51h
+iter 7550/40000 loss 0.8654 lr 1.66e-04 elapsed 90.5m eta 6.48h
+iter 7600/40000 loss 0.8034 lr 1.65e-04 elapsed 91.0m eta 6.46h
+iter 7650/40000 loss 0.8144 lr 1.65e-04 elapsed 91.4m eta 6.44h
+iter 7700/40000 loss 0.8567 lr 1.65e-04 elapsed 91.8m eta 6.42h
+iter 7750/40000 loss 0.8424 lr 1.65e-04 elapsed 92.3m eta 6.40h
+iter 7800/40000 loss 0.8382 lr 1.65e-04 elapsed 92.7m eta 6.38h
+iter 7850/40000 loss 0.8366 lr 1.64e-04 elapsed 93.1m eta 6.36h
+iter 7900/40000 loss 0.8453 lr 1.64e-04 elapsed 93.5m eta 6.33h
+iter 7950/40000 loss 0.7662 lr 1.64e-04 elapsed 94.0m eta 6.31h
+iter 8000/40000 loss 0.8032 lr 1.64e-04 elapsed 94.4m eta 6.29h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 8000] mIoU 33.50 aAcc 77.65 mAcc 45.48 (500 images)
+iter 8050/40000 loss 0.8436 lr 1.63e-04 elapsed 95.1m eta 6.29h
+iter 8100/40000 loss 0.8587 lr 1.63e-04 elapsed 95.5m eta 6.27h
+iter 8150/40000 loss 0.8069 lr 1.63e-04 elapsed 95.9m eta 6.25h
+iter 8200/40000 loss 0.8378 lr 1.63e-04 elapsed 96.4m eta 6.23h
+iter 8250/40000 loss 0.8017 lr 1.62e-04 elapsed 96.8m eta 6.21h
+iter 8300/40000 loss 0.7811 lr 1.62e-04 elapsed 97.2m eta 6.19h
+iter 8350/40000 loss 0.7828 lr 1.62e-04 elapsed 97.7m eta 6.17h
+iter 8400/40000 loss 0.8394 lr 1.62e-04 elapsed 98.1m eta 6.15h
+iter 8450/40000 loss 0.7842 lr 1.62e-04 elapsed 98.5m eta 6.13h
+iter 8500/40000 loss 0.8133 lr 1.61e-04 elapsed 98.9m eta 6.11h
+iter 8550/40000 loss 0.7910 lr 1.61e-04 elapsed 99.4m eta 6.09h
+iter 8600/40000 loss 0.8248 lr 1.61e-04 elapsed 99.8m eta 6.07h
+iter 8650/40000 loss 0.7914 lr 1.61e-04 elapsed 100.2m eta 6.06h
+iter 8700/40000 loss 0.8031 lr 1.60e-04 elapsed 100.7m eta 6.04h
+iter 8750/40000 loss 0.8459 lr 1.60e-04 elapsed 101.1m eta 6.02h
+iter 8800/40000 loss 0.7858 lr 1.60e-04 elapsed 101.5m eta 6.00h
+iter 8850/40000 loss 0.8571 lr 1.60e-04 elapsed 102.0m eta 5.98h
+iter 8900/40000 loss 0.7700 lr 1.59e-04 elapsed 102.4m eta 5.96h
+iter 8950/40000 loss 0.7700 lr 1.59e-04 elapsed 102.8m eta 5.95h
+iter 9000/40000 loss 0.7868 lr 1.59e-04 elapsed 103.3m eta 5.93h
+iter 9050/40000 loss 0.7795 lr 1.59e-04 elapsed 103.7m eta 5.91h
+iter 9100/40000 loss 0.8053 lr 1.59e-04 elapsed 104.1m eta 5.89h
+iter 9150/40000 loss 0.7669 lr 1.58e-04 elapsed 104.6m eta 5.88h
+iter 9200/40000 loss 0.8136 lr 1.58e-04 elapsed 105.0m eta 5.86h
+iter 9250/40000 loss 0.7758 lr 1.58e-04 elapsed 105.4m eta 5.84h
+iter 9300/40000 loss 0.7694 lr 1.58e-04 elapsed 105.8m eta 5.82h
+iter 9350/40000 loss 0.7756 lr 1.57e-04 elapsed 106.3m eta 5.81h
+iter 9400/40000 loss 0.7735 lr 1.57e-04 elapsed 106.7m eta 5.79h
+iter 9450/40000 loss 0.8033 lr 1.57e-04 elapsed 107.1m eta 5.77h
+iter 9500/40000 loss 0.7785 lr 1.57e-04 elapsed 107.6m eta 5.76h
+iter 9550/40000 loss 0.7604 lr 1.56e-04 elapsed 108.0m eta 5.74h
+iter 9600/40000 loss 0.7623 lr 1.56e-04 elapsed 108.4m eta 5.72h
+iter 9650/40000 loss 0.7543 lr 1.56e-04 elapsed 108.9m eta 5.71h
+iter 9700/40000 loss 0.7553 lr 1.56e-04 elapsed 109.3m eta 5.69h
+iter 9750/40000 loss 0.7926 lr 1.56e-04 elapsed 109.7m eta 5.67h
+iter 9800/40000 loss 0.8186 lr 1.55e-04 elapsed 110.2m eta 5.66h
+iter 9850/40000 loss 0.7528 lr 1.55e-04 elapsed 110.6m eta 5.64h
+iter 9900/40000 loss 0.7696 lr 1.55e-04 elapsed 111.0m eta 5.63h
+iter 9950/40000 loss 0.7985 lr 1.55e-04 elapsed 111.4m eta 5.61h
+iter 10000/40000 loss 0.7612 lr 1.54e-04 elapsed 111.9m eta 5.59h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 10000] mIoU 34.14 aAcc 78.32 mAcc 47.08 (500 images)
+iter 10050/40000 loss 0.7789 lr 1.54e-04 elapsed 112.5m eta 5.59h
+iter 10100/40000 loss 0.7746 lr 1.54e-04 elapsed 113.0m eta 5.57h
+iter 10150/40000 loss 0.7555 lr 1.54e-04 elapsed 113.4m eta 5.56h
+iter 10200/40000 loss 0.7783 lr 1.53e-04 elapsed 113.8m eta 5.54h
+iter 10250/40000 loss 0.7455 lr 1.53e-04 elapsed 114.3m eta 5.53h
+iter 10300/40000 loss 0.7572 lr 1.53e-04 elapsed 114.7m eta 5.51h
+iter 10350/40000 loss 0.7266 lr 1.53e-04 elapsed 115.1m eta 5.50h
+iter 10400/40000 loss 0.7315 lr 1.53e-04 elapsed 115.6m eta 5.48h
+iter 10450/40000 loss 0.7342 lr 1.52e-04 elapsed 116.0m eta 5.47h
+iter 10500/40000 loss 0.7811 lr 1.52e-04 elapsed 116.4m eta 5.45h
+iter 10550/40000 loss 0.7583 lr 1.52e-04 elapsed 116.9m eta 5.44h
+iter 10600/40000 loss 0.7907 lr 1.52e-04 elapsed 117.3m eta 5.42h
+iter 10650/40000 loss 0.7482 lr 1.51e-04 elapsed 117.7m eta 5.41h
+iter 10700/40000 loss 0.7896 lr 1.51e-04 elapsed 118.1m eta 5.39h
+iter 10750/40000 loss 0.7786 lr 1.51e-04 elapsed 118.6m eta 5.38h
+iter 10800/40000 loss 0.7389 lr 1.51e-04 elapsed 119.0m eta 5.36h
+iter 10850/40000 loss 0.7200 lr 1.50e-04 elapsed 119.4m eta 5.35h
+iter 10900/40000 loss 0.7339 lr 1.50e-04 elapsed 119.9m eta 5.33h
+iter 10950/40000 loss 0.7295 lr 1.50e-04 elapsed 120.3m eta 5.32h
+iter 11000/40000 loss 0.7317 lr 1.50e-04 elapsed 120.7m eta 5.30h
+iter 11050/40000 loss 0.7245 lr 1.50e-04 elapsed 121.2m eta 5.29h
+iter 11100/40000 loss 0.7530 lr 1.49e-04 elapsed 121.6m eta 5.28h
+iter 11150/40000 loss 0.7404 lr 1.49e-04 elapsed 122.0m eta 5.26h
+iter 11200/40000 loss 0.7495 lr 1.49e-04 elapsed 122.5m eta 5.25h
+iter 11250/40000 loss 0.7318 lr 1.49e-04 elapsed 122.9m eta 5.23h
+iter 11300/40000 loss 0.7703 lr 1.48e-04 elapsed 123.3m eta 5.22h
+iter 11350/40000 loss 0.7488 lr 1.48e-04 elapsed 123.8m eta 5.21h
+iter 11400/40000 loss 0.7481 lr 1.48e-04 elapsed 124.2m eta 5.19h
+/home/sanugi/ml-fastvit/.venv/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/sanugi/ml-fastvit/.venv/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/sanugi/ml-fastvit/models/fastvit.py:964: UserWarning: Overwriting fastvit_t8 in registry with models.fastvit.fastvit_t8. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t8(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:986: UserWarning: Overwriting fastvit_t12 in registry with models.fastvit.fastvit_t12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_t12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1008: UserWarning: Overwriting fastvit_s12 in registry with models.fastvit.fastvit_s12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_s12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1030: UserWarning: Overwriting fastvit_sa12 in registry with models.fastvit.fastvit_sa12. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa12(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1054: UserWarning: Overwriting fastvit_sa24 in registry with models.fastvit.fastvit_sa24. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa24(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1078: UserWarning: Overwriting fastvit_sa36 in registry with models.fastvit.fastvit_sa36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_sa36(pretrained=False, **kwargs):
+/home/sanugi/ml-fastvit/models/fastvit.py:1103: UserWarning: Overwriting fastvit_ma36 in registry with models.fastvit.fastvit_ma36. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  def fastvit_ma36(pretrained=False, **kwargs):
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+If for semantic segmentation, please install mmsegmentation first
+If for detection, please install mmdetection first
+device: cuda
+[backbone] loaded 486/506 tensors from checkpoints/fastvit_sa12.pth.tar
+[backbone] skipped from checkpoint (classifier head): 18 tensors, e.g. ['conv_exp.rbr_conv.0.bn.bias', 'conv_exp.rbr_conv.0.bn.num_batches_tracked', 'conv_exp.rbr_conv.0.bn.running_mean']
+fastvit_sa12 + Semantic FPN: 14.66M params
+train images: 20210, val images: 2000
+resumed from runs/fastvit_sa12/last.pth at iter 11000
+iter 11050/40000 loss 0.7412 lr 1.50e-04 elapsed 0.4m eta 4.32h
+iter 11100/40000 loss 0.7080 lr 1.49e-04 elapsed 0.9m eta 4.21h
+iter 11150/40000 loss 0.7257 lr 1.49e-04 elapsed 1.3m eta 4.18h
+iter 11200/40000 loss 0.7075 lr 1.49e-04 elapsed 1.7m eta 4.15h
+iter 11250/40000 loss 0.7289 lr 1.49e-04 elapsed 2.2m eta 4.14h
+iter 11300/40000 loss 0.7282 lr 1.48e-04 elapsed 2.6m eta 4.13h
+iter 11350/40000 loss 0.7315 lr 1.48e-04 elapsed 3.0m eta 4.12h
+iter 11400/40000 loss 0.7001 lr 1.48e-04 elapsed 3.4m eta 4.11h
+iter 11450/40000 loss 0.7277 lr 1.48e-04 elapsed 3.9m eta 4.10h
+iter 11500/40000 loss 0.6954 lr 1.47e-04 elapsed 4.3m eta 4.09h
+iter 11550/40000 loss 0.7018 lr 1.47e-04 elapsed 4.7m eta 4.09h
+iter 11600/40000 loss 0.7318 lr 1.47e-04 elapsed 5.2m eta 4.08h
+iter 11650/40000 loss 0.7217 lr 1.47e-04 elapsed 5.6m eta 4.07h
+iter 11700/40000 loss 0.6674 lr 1.46e-04 elapsed 6.0m eta 4.06h
+iter 11750/40000 loss 0.7182 lr 1.46e-04 elapsed 6.5m eta 4.06h
+iter 11800/40000 loss 0.7108 lr 1.46e-04 elapsed 6.9m eta 4.05h
+iter 11850/40000 loss 0.6973 lr 1.46e-04 elapsed 7.3m eta 4.04h
+iter 11900/40000 loss 0.6793 lr 1.46e-04 elapsed 7.7m eta 4.03h
+iter 11950/40000 loss 0.6598 lr 1.45e-04 elapsed 8.2m eta 4.02h
+iter 12000/40000 loss 0.6942 lr 1.45e-04 elapsed 8.6m eta 4.02h
+evaluating on 500 val images...
+  eval 250/500 (9s)
+[eval @ 12000] mIoU 35.17 aAcc 78.67 mAcc 48.39 (500 images)
+iter 12050/40000 loss 0.6735 lr 1.45e-04 elapsed 9.3m eta 4.13h
+iter 12100/40000 loss 0.6927 lr 1.45e-04 elapsed 9.7m eta 4.12h
+iter 12150/40000 loss 0.7165 lr 1.44e-04 elapsed 10.2m eta 4.11h
+iter 12200/40000 loss 0.6564 lr 1.44e-04 elapsed 10.6m eta 4.10h
+iter 12250/40000 loss 0.7003 lr 1.44e-04 elapsed 11.0m eta 4.08h
+iter 12300/40000 loss 0.6692 lr 1.44e-04 elapsed 11.5m eta 4.08h
+iter 12350/40000 loss 0.6616 lr 1.43e-04 elapsed 11.9m eta 4.06h
+iter 12400/40000 loss 0.6609 lr 1.43e-04 elapsed 12.3m eta 4.05h
+iter 12450/40000 loss 0.6477 lr 1.43e-04 elapsed 12.8m eta 4.04h
+iter 12500/40000 loss 0.6839 lr 1.43e-04 elapsed 13.2m eta 4.03h
+iter 12550/40000 loss 0.7003 lr 1.43e-04 elapsed 13.6m eta 4.02h
+iter 12600/40000 loss 0.6781 lr 1.42e-04 elapsed 14.1m eta 4.01h
+iter 12650/40000 loss 0.6642 lr 1.42e-04 elapsed 14.5m eta 4.00h
+iter 12700/40000 loss 0.6535 lr 1.42e-04 elapsed 14.9m eta 3.99h
+iter 12750/40000 loss 0.6592 lr 1.42e-04 elapsed 15.3m eta 3.98h
+iter 12800/40000 loss 0.6487 lr 1.41e-04 elapsed 15.8m eta 3.97h
+iter 12850/40000 loss 0.6799 lr 1.41e-04 elapsed 16.2m eta 3.96h
+iter 12900/40000 loss 0.6905 lr 1.41e-04 elapsed 16.6m eta 3.95h
+iter 12950/40000 loss 0.6365 lr 1.41e-04 elapsed 17.1m eta 3.95h
+iter 13000/40000 loss 0.6723 lr 1.40e-04 elapsed 17.5m eta 3.94h
+iter 13050/40000 loss 0.6483 lr 1.40e-04 elapsed 17.9m eta 3.93h
+iter 13100/40000 loss 0.6494 lr 1.40e-04 elapsed 18.4m eta 3.92h
+iter 13150/40000 loss 0.6538 lr 1.40e-04 elapsed 18.8m eta 3.91h
+iter 13200/40000 loss 0.6524 lr 1.39e-04 elapsed 19.2m eta 3.90h
+iter 13250/40000 loss 0.6452 lr 1.39e-04 elapsed 19.6m eta 3.89h
+iter 13300/40000 loss 0.6421 lr 1.39e-04 elapsed 20.1m eta 3.88h
+iter 13350/40000 loss 0.6578 lr 1.39e-04 elapsed 20.5m eta 3.88h
+iter 13400/40000 loss 0.6512 lr 1.39e-04 elapsed 20.9m eta 3.87h
+iter 13450/40000 loss 0.6439 lr 1.38e-04 elapsed 21.4m eta 3.86h
+iter 13500/40000 loss 0.6490 lr 1.38e-04 elapsed 21.8m eta 3.85h
+iter 13550/40000 loss 0.6488 lr 1.38e-04 elapsed 22.2m eta 3.84h
+iter 13600/40000 loss 0.6200 lr 1.38e-04 elapsed 22.7m eta 3.84h
+iter 13650/40000 loss 0.6443 lr 1.37e-04 elapsed 23.1m eta 3.83h
+iter 13700/40000 loss 0.6198 lr 1.37e-04 elapsed 23.5m eta 3.82h
+iter 13750/40000 loss 0.6183 lr 1.37e-04 elapsed 24.0m eta 3.81h
+iter 13800/40000 loss 0.6435 lr 1.37e-04 elapsed 24.4m eta 3.80h
+iter 13850/40000 loss 0.6300 lr 1.36e-04 elapsed 24.8m eta 3.79h
+iter 13900/40000 loss 0.6531 lr 1.36e-04 elapsed 25.2m eta 3.79h
+iter 13950/40000 loss 0.6388 lr 1.36e-04 elapsed 25.7m eta 3.78h
+iter 14000/40000 loss 0.6240 lr 1.36e-04 elapsed 26.1m eta 3.77h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 14000] mIoU 34.76 aAcc 78.96 mAcc 49.27 (500 images)
+iter 14050/40000 loss 0.6484 lr 1.35e-04 elapsed 26.8m eta 3.80h
+iter 14100/40000 loss 0.6376 lr 1.35e-04 elapsed 27.2m eta 3.79h
+iter 14150/40000 loss 0.6353 lr 1.35e-04 elapsed 27.6m eta 3.78h
+iter 14200/40000 loss 0.6016 lr 1.35e-04 elapsed 28.1m eta 3.77h
+iter 14250/40000 loss 0.5991 lr 1.35e-04 elapsed 28.5m eta 3.76h
+iter 14300/40000 loss 0.6193 lr 1.34e-04 elapsed 28.9m eta 3.75h
+iter 14350/40000 loss 0.5974 lr 1.34e-04 elapsed 29.4m eta 3.75h
+iter 14400/40000 loss 0.6226 lr 1.34e-04 elapsed 29.8m eta 3.74h
+iter 14450/40000 loss 0.6276 lr 1.34e-04 elapsed 30.2m eta 3.73h
+iter 14500/40000 loss 0.6254 lr 1.33e-04 elapsed 30.6m eta 3.72h
+iter 14550/40000 loss 0.6329 lr 1.33e-04 elapsed 31.1m eta 3.71h
+iter 14600/40000 loss 0.6256 lr 1.33e-04 elapsed 31.5m eta 3.71h
+iter 14650/40000 loss 0.6076 lr 1.33e-04 elapsed 31.9m eta 3.70h
+iter 14700/40000 loss 0.6306 lr 1.32e-04 elapsed 32.4m eta 3.69h
+iter 14750/40000 loss 0.5891 lr 1.32e-04 elapsed 32.8m eta 3.68h
+iter 14800/40000 loss 0.5960 lr 1.32e-04 elapsed 33.2m eta 3.67h
+iter 14850/40000 loss 0.5867 lr 1.32e-04 elapsed 33.7m eta 3.67h
+iter 14900/40000 loss 0.6038 lr 1.31e-04 elapsed 34.1m eta 3.66h
+iter 14950/40000 loss 0.6020 lr 1.31e-04 elapsed 34.5m eta 3.65h
+iter 15000/40000 loss 0.5856 lr 1.31e-04 elapsed 34.9m eta 3.64h
+iter 15050/40000 loss 0.5974 lr 1.31e-04 elapsed 35.4m eta 3.63h
+iter 15100/40000 loss 0.6043 lr 1.31e-04 elapsed 35.8m eta 3.63h
+iter 15150/40000 loss 0.6127 lr 1.30e-04 elapsed 36.2m eta 3.62h
+iter 15200/40000 loss 0.6215 lr 1.30e-04 elapsed 36.7m eta 3.61h
+iter 15250/40000 loss 0.6089 lr 1.30e-04 elapsed 37.1m eta 3.60h
+iter 15300/40000 loss 0.6053 lr 1.30e-04 elapsed 37.5m eta 3.59h
+iter 15350/40000 loss 0.5943 lr 1.29e-04 elapsed 38.0m eta 3.58h
+iter 15400/40000 loss 0.6132 lr 1.29e-04 elapsed 38.4m eta 3.58h
+iter 15450/40000 loss 0.5745 lr 1.29e-04 elapsed 38.8m eta 3.57h
+iter 15500/40000 loss 0.5965 lr 1.29e-04 elapsed 39.3m eta 3.56h
+iter 15550/40000 loss 0.5931 lr 1.28e-04 elapsed 39.7m eta 3.55h
+iter 15600/40000 loss 0.5958 lr 1.28e-04 elapsed 40.1m eta 3.55h
+iter 15650/40000 loss 0.5973 lr 1.28e-04 elapsed 40.5m eta 3.54h
+iter 15700/40000 loss 0.5814 lr 1.28e-04 elapsed 41.0m eta 3.53h
+iter 15750/40000 loss 0.5911 lr 1.27e-04 elapsed 41.4m eta 3.52h
+iter 15800/40000 loss 0.5935 lr 1.27e-04 elapsed 41.8m eta 3.52h
+iter 15850/40000 loss 0.6076 lr 1.27e-04 elapsed 42.3m eta 3.51h
+iter 15900/40000 loss 0.5796 lr 1.27e-04 elapsed 42.7m eta 3.50h
+iter 15950/40000 loss 0.5872 lr 1.27e-04 elapsed 43.1m eta 3.49h
+iter 16000/40000 loss 0.5963 lr 1.26e-04 elapsed 43.6m eta 3.48h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 16000] mIoU 35.51 aAcc 78.96 mAcc 48.10 (500 images)
+iter 16050/40000 loss 0.5742 lr 1.26e-04 elapsed 44.2m eta 3.50h
+iter 16100/40000 loss 0.5631 lr 1.26e-04 elapsed 44.7m eta 3.49h
+iter 16150/40000 loss 0.5741 lr 1.26e-04 elapsed 45.1m eta 3.48h
+iter 16200/40000 loss 0.5835 lr 1.25e-04 elapsed 45.5m eta 3.47h
+iter 16250/40000 loss 0.5728 lr 1.25e-04 elapsed 45.9m eta 3.46h
+iter 16300/40000 loss 0.5748 lr 1.25e-04 elapsed 46.4m eta 3.46h
+iter 16350/40000 loss 0.5578 lr 1.25e-04 elapsed 46.8m eta 3.45h
+iter 16400/40000 loss 0.5888 lr 1.24e-04 elapsed 47.2m eta 3.44h
+iter 16450/40000 loss 0.6138 lr 1.24e-04 elapsed 47.7m eta 3.43h
+iter 16500/40000 loss 0.6082 lr 1.24e-04 elapsed 48.1m eta 3.42h
+iter 16550/40000 loss 0.5794 lr 1.24e-04 elapsed 48.5m eta 3.42h
+iter 16600/40000 loss 0.5845 lr 1.23e-04 elapsed 49.0m eta 3.41h
+iter 16650/40000 loss 0.5785 lr 1.23e-04 elapsed 49.4m eta 3.40h
+iter 16700/40000 loss 0.5595 lr 1.23e-04 elapsed 49.8m eta 3.39h
+iter 16750/40000 loss 0.5572 lr 1.23e-04 elapsed 50.3m eta 3.39h
+iter 16800/40000 loss 0.5518 lr 1.22e-04 elapsed 50.7m eta 3.38h
+iter 16850/40000 loss 0.5717 lr 1.22e-04 elapsed 51.1m eta 3.37h
+iter 16900/40000 loss 0.5594 lr 1.22e-04 elapsed 51.5m eta 3.36h
+iter 16950/40000 loss 0.5727 lr 1.22e-04 elapsed 52.0m eta 3.36h
+iter 17000/40000 loss 0.5601 lr 1.22e-04 elapsed 52.4m eta 3.35h
+iter 17050/40000 loss 0.5841 lr 1.21e-04 elapsed 52.8m eta 3.34h
+iter 17100/40000 loss 0.5853 lr 1.21e-04 elapsed 53.3m eta 3.33h
+iter 17150/40000 loss 0.5465 lr 1.21e-04 elapsed 53.7m eta 3.33h
+iter 17200/40000 loss 0.5556 lr 1.21e-04 elapsed 54.1m eta 3.32h
+iter 17250/40000 loss 0.5661 lr 1.20e-04 elapsed 54.6m eta 3.31h
+iter 17300/40000 loss 0.5639 lr 1.20e-04 elapsed 55.0m eta 3.30h
+iter 17350/40000 loss 0.5723 lr 1.20e-04 elapsed 55.4m eta 3.29h
+iter 17400/40000 loss 0.5583 lr 1.20e-04 elapsed 55.9m eta 3.29h
+iter 17450/40000 loss 0.5625 lr 1.19e-04 elapsed 56.3m eta 3.28h
+iter 17500/40000 loss 0.5458 lr 1.19e-04 elapsed 56.7m eta 3.27h
+iter 17550/40000 loss 0.5549 lr 1.19e-04 elapsed 57.1m eta 3.26h
+iter 17600/40000 loss 0.5403 lr 1.19e-04 elapsed 57.6m eta 3.26h
+iter 17650/40000 loss 0.5672 lr 1.18e-04 elapsed 58.0m eta 3.25h
+iter 17700/40000 loss 0.5477 lr 1.18e-04 elapsed 58.4m eta 3.24h
+iter 17750/40000 loss 0.5669 lr 1.18e-04 elapsed 58.9m eta 3.23h
+iter 17800/40000 loss 0.5588 lr 1.18e-04 elapsed 59.3m eta 3.23h
+iter 17850/40000 loss 0.5504 lr 1.17e-04 elapsed 59.7m eta 3.22h
+iter 17900/40000 loss 0.5600 lr 1.17e-04 elapsed 60.1m eta 3.21h
+iter 17950/40000 loss 0.5516 lr 1.17e-04 elapsed 60.6m eta 3.20h
+iter 18000/40000 loss 0.5342 lr 1.17e-04 elapsed 61.0m eta 3.20h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 18000] mIoU 36.03 aAcc 79.78 mAcc 49.03 (500 images)
+iter 18050/40000 loss 0.5385 lr 1.17e-04 elapsed 61.7m eta 3.20h
+iter 18100/40000 loss 0.5285 lr 1.16e-04 elapsed 62.1m eta 3.19h
+iter 18150/40000 loss 0.5402 lr 1.16e-04 elapsed 62.5m eta 3.19h
+iter 18200/40000 loss 0.5567 lr 1.16e-04 elapsed 63.0m eta 3.18h
+iter 18250/40000 loss 0.5532 lr 1.16e-04 elapsed 63.4m eta 3.17h
+iter 18300/40000 loss 0.5591 lr 1.15e-04 elapsed 63.8m eta 3.16h
+iter 18350/40000 loss 0.5652 lr 1.15e-04 elapsed 64.3m eta 3.15h
+iter 18400/40000 loss 0.5376 lr 1.15e-04 elapsed 64.7m eta 3.15h
+iter 18450/40000 loss 0.5417 lr 1.15e-04 elapsed 65.1m eta 3.14h
+iter 18500/40000 loss 0.5441 lr 1.14e-04 elapsed 65.5m eta 3.13h
+iter 18550/40000 loss 0.5385 lr 1.14e-04 elapsed 66.0m eta 3.12h
+iter 18600/40000 loss 0.5148 lr 1.14e-04 elapsed 66.4m eta 3.12h
+iter 18650/40000 loss 0.5227 lr 1.14e-04 elapsed 66.9m eta 3.11h
+iter 18700/40000 loss 0.5478 lr 1.13e-04 elapsed 67.3m eta 3.10h
+iter 18750/40000 loss 0.5492 lr 1.13e-04 elapsed 67.7m eta 3.09h
+iter 18800/40000 loss 0.5437 lr 1.13e-04 elapsed 68.1m eta 3.09h
+iter 18850/40000 loss 0.5350 lr 1.13e-04 elapsed 68.6m eta 3.08h
+iter 18900/40000 loss 0.5492 lr 1.12e-04 elapsed 69.0m eta 3.07h
+iter 18950/40000 loss 0.5094 lr 1.12e-04 elapsed 69.4m eta 3.06h
+iter 19000/40000 loss 0.5238 lr 1.12e-04 elapsed 69.9m eta 3.06h
+iter 19050/40000 loss 0.5475 lr 1.12e-04 elapsed 70.3m eta 3.05h
+iter 19100/40000 loss 0.5615 lr 1.12e-04 elapsed 70.7m eta 3.04h
+iter 19150/40000 loss 0.5264 lr 1.11e-04 elapsed 71.1m eta 3.03h
+iter 19200/40000 loss 0.5442 lr 1.11e-04 elapsed 71.6m eta 3.03h
+iter 19250/40000 loss 0.5309 lr 1.11e-04 elapsed 72.0m eta 3.02h
+iter 19300/40000 loss 0.5221 lr 1.11e-04 elapsed 72.4m eta 3.01h
+iter 19350/40000 loss 0.5097 lr 1.10e-04 elapsed 72.9m eta 3.00h
+iter 19400/40000 loss 0.5396 lr 1.10e-04 elapsed 73.3m eta 3.00h
+iter 19450/40000 loss 0.5085 lr 1.10e-04 elapsed 73.7m eta 2.99h
+iter 19500/40000 loss 0.5301 lr 1.10e-04 elapsed 74.2m eta 2.98h
+iter 19550/40000 loss 0.5207 lr 1.09e-04 elapsed 74.6m eta 2.97h
+iter 19600/40000 loss 0.5364 lr 1.09e-04 elapsed 75.0m eta 2.97h
+iter 19650/40000 loss 0.5021 lr 1.09e-04 elapsed 75.5m eta 2.96h
+iter 19700/40000 loss 0.5290 lr 1.09e-04 elapsed 75.9m eta 2.95h
+iter 19750/40000 loss 0.5465 lr 1.08e-04 elapsed 76.3m eta 2.94h
+iter 19800/40000 loss 0.5129 lr 1.08e-04 elapsed 76.7m eta 2.94h
+iter 19850/40000 loss 0.5476 lr 1.08e-04 elapsed 77.2m eta 2.93h
+iter 19900/40000 loss 0.5104 lr 1.08e-04 elapsed 77.6m eta 2.92h
+iter 19950/40000 loss 0.5115 lr 1.07e-04 elapsed 78.0m eta 2.91h
+iter 20000/40000 loss 0.5163 lr 1.07e-04 elapsed 78.5m eta 2.91h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 20000] mIoU 35.99 aAcc 79.83 mAcc 49.61 (500 images)
+iter 20050/40000 loss 0.5128 lr 1.07e-04 elapsed 79.1m eta 2.91h
+iter 20100/40000 loss 0.5344 lr 1.07e-04 elapsed 79.6m eta 2.90h
+iter 20150/40000 loss 0.5062 lr 1.06e-04 elapsed 80.0m eta 2.89h
+iter 20200/40000 loss 0.5140 lr 1.06e-04 elapsed 80.4m eta 2.88h
+iter 20250/40000 loss 0.5158 lr 1.06e-04 elapsed 80.9m eta 2.88h
+iter 20300/40000 loss 0.5098 lr 1.06e-04 elapsed 81.3m eta 2.87h
+iter 20350/40000 loss 0.5126 lr 1.05e-04 elapsed 81.7m eta 2.86h
+iter 20400/40000 loss 0.5080 lr 1.05e-04 elapsed 82.1m eta 2.85h
+iter 20450/40000 loss 0.5261 lr 1.05e-04 elapsed 82.6m eta 2.85h
+iter 20500/40000 loss 0.5078 lr 1.05e-04 elapsed 83.0m eta 2.84h
+iter 20550/40000 loss 0.4973 lr 1.05e-04 elapsed 83.4m eta 2.83h
+iter 20600/40000 loss 0.5106 lr 1.04e-04 elapsed 83.9m eta 2.83h
+iter 20650/40000 loss 0.5003 lr 1.04e-04 elapsed 84.3m eta 2.82h
+iter 20700/40000 loss 0.5110 lr 1.04e-04 elapsed 84.7m eta 2.81h
+iter 20750/40000 loss 0.5262 lr 1.04e-04 elapsed 85.2m eta 2.80h
+iter 20800/40000 loss 0.5251 lr 1.03e-04 elapsed 85.6m eta 2.80h
+iter 20850/40000 loss 0.5150 lr 1.03e-04 elapsed 86.0m eta 2.79h
+iter 20900/40000 loss 0.5068 lr 1.03e-04 elapsed 86.5m eta 2.78h
+iter 20950/40000 loss 0.5204 lr 1.03e-04 elapsed 86.9m eta 2.77h
+iter 21000/40000 loss 0.5029 lr 1.02e-04 elapsed 87.3m eta 2.77h
+iter 21050/40000 loss 0.5073 lr 1.02e-04 elapsed 87.8m eta 2.76h
+iter 21100/40000 loss 0.5260 lr 1.02e-04 elapsed 88.2m eta 2.75h
+iter 21150/40000 loss 0.4913 lr 1.02e-04 elapsed 88.6m eta 2.74h
+iter 21200/40000 loss 0.5177 lr 1.01e-04 elapsed 89.0m eta 2.74h
+iter 21250/40000 loss 0.5024 lr 1.01e-04 elapsed 89.5m eta 2.73h
+iter 21300/40000 loss 0.4949 lr 1.01e-04 elapsed 89.9m eta 2.72h
+iter 21350/40000 loss 0.4939 lr 1.01e-04 elapsed 90.3m eta 2.71h
+iter 21400/40000 loss 0.4941 lr 1.00e-04 elapsed 90.8m eta 2.71h
+iter 21450/40000 loss 0.4924 lr 1.00e-04 elapsed 91.2m eta 2.70h
+iter 21500/40000 loss 0.5190 lr 9.99e-05 elapsed 91.6m eta 2.69h
+iter 21550/40000 loss 0.4933 lr 9.97e-05 elapsed 92.1m eta 2.68h
+iter 21600/40000 loss 0.5208 lr 9.94e-05 elapsed 92.5m eta 2.68h
+iter 21650/40000 loss 0.4975 lr 9.92e-05 elapsed 92.9m eta 2.67h
+iter 21700/40000 loss 0.5106 lr 9.89e-05 elapsed 93.4m eta 2.66h
+iter 21750/40000 loss 0.5211 lr 9.87e-05 elapsed 93.8m eta 2.65h
+iter 21800/40000 loss 0.5041 lr 9.85e-05 elapsed 94.2m eta 2.65h
+iter 21850/40000 loss 0.4810 lr 9.82e-05 elapsed 94.7m eta 2.64h
+iter 21900/40000 loss 0.4946 lr 9.80e-05 elapsed 95.1m eta 2.63h
+iter 21950/40000 loss 0.4900 lr 9.77e-05 elapsed 95.5m eta 2.62h
+iter 22000/40000 loss 0.4799 lr 9.75e-05 elapsed 95.9m eta 2.62h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 22000] mIoU 36.19 aAcc 79.38 mAcc 50.00 (500 images)
+iter 22050/40000 loss 0.5546 lr 9.72e-05 elapsed 96.6m eta 2.62h
+iter 22100/40000 loss 0.5951 lr 9.70e-05 elapsed 97.0m eta 2.61h
+iter 22150/40000 loss 0.5871 lr 9.68e-05 elapsed 97.5m eta 2.60h
+iter 22200/40000 loss 0.6011 lr 9.65e-05 elapsed 97.9m eta 2.59h
+iter 22250/40000 loss 0.5744 lr 9.63e-05 elapsed 98.3m eta 2.59h
+iter 22300/40000 loss 0.6056 lr 9.60e-05 elapsed 98.8m eta 2.58h
+iter 22350/40000 loss 0.5932 lr 9.58e-05 elapsed 99.2m eta 2.57h
+iter 22400/40000 loss 0.5926 lr 9.55e-05 elapsed 99.6m eta 2.56h
+iter 22450/40000 loss 0.5711 lr 9.53e-05 elapsed 100.1m eta 2.56h
+iter 22500/40000 loss 0.5665 lr 9.50e-05 elapsed 100.5m eta 2.55h
+iter 22550/40000 loss 0.5514 lr 9.48e-05 elapsed 100.9m eta 2.54h
+iter 22600/40000 loss 0.5693 lr 9.46e-05 elapsed 101.3m eta 2.53h
+iter 22650/40000 loss 0.5793 lr 9.43e-05 elapsed 101.8m eta 2.53h
+iter 22700/40000 loss 0.5865 lr 9.41e-05 elapsed 102.2m eta 2.52h
+iter 22750/40000 loss 0.5656 lr 9.38e-05 elapsed 102.6m eta 2.51h
+iter 22800/40000 loss 0.5704 lr 9.36e-05 elapsed 103.1m eta 2.50h
+iter 22850/40000 loss 0.5589 lr 9.33e-05 elapsed 103.5m eta 2.50h
+iter 22900/40000 loss 0.5877 lr 9.31e-05 elapsed 103.9m eta 2.49h
+iter 22950/40000 loss 0.5705 lr 9.28e-05 elapsed 104.4m eta 2.48h
+iter 23000/40000 loss 0.5470 lr 9.26e-05 elapsed 104.8m eta 2.47h
+iter 23050/40000 loss 0.5501 lr 9.24e-05 elapsed 105.2m eta 2.47h
+iter 23100/40000 loss 0.5349 lr 9.21e-05 elapsed 105.7m eta 2.46h
+iter 23150/40000 loss 0.5713 lr 9.19e-05 elapsed 106.1m eta 2.45h
+iter 23200/40000 loss 0.5555 lr 9.16e-05 elapsed 106.5m eta 2.44h
+iter 23250/40000 loss 0.5459 lr 9.14e-05 elapsed 106.9m eta 2.44h
+iter 23300/40000 loss 0.5739 lr 9.11e-05 elapsed 107.4m eta 2.43h
+iter 23350/40000 loss 0.5537 lr 9.09e-05 elapsed 107.8m eta 2.42h
+iter 23400/40000 loss 0.5630 lr 9.06e-05 elapsed 108.2m eta 2.41h
+iter 23450/40000 loss 0.5675 lr 9.04e-05 elapsed 108.7m eta 2.41h
+iter 23500/40000 loss 0.5589 lr 9.01e-05 elapsed 109.1m eta 2.40h
+iter 23550/40000 loss 0.5610 lr 8.99e-05 elapsed 109.5m eta 2.39h
+iter 23600/40000 loss 0.5642 lr 8.97e-05 elapsed 110.0m eta 2.39h
+iter 23650/40000 loss 0.5501 lr 8.94e-05 elapsed 110.4m eta 2.38h
+iter 23700/40000 loss 0.5577 lr 8.92e-05 elapsed 110.8m eta 2.37h
+iter 23750/40000 loss 0.5580 lr 8.89e-05 elapsed 111.3m eta 2.36h
+iter 23800/40000 loss 0.5432 lr 8.87e-05 elapsed 111.7m eta 2.36h
+iter 23850/40000 loss 0.5612 lr 8.84e-05 elapsed 112.1m eta 2.35h
+iter 23900/40000 loss 0.5506 lr 8.82e-05 elapsed 112.5m eta 2.34h
+iter 23950/40000 loss 0.5390 lr 8.79e-05 elapsed 113.0m eta 2.33h
+iter 24000/40000 loss 0.5501 lr 8.77e-05 elapsed 113.4m eta 2.33h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 24000] mIoU 36.86 aAcc 79.51 mAcc 50.95 (500 images)
+iter 24050/40000 loss 0.5267 lr 8.74e-05 elapsed 114.2m eta 2.33h
+iter 24100/40000 loss 0.5543 lr 8.72e-05 elapsed 115.1m eta 2.33h
+iter 24150/40000 loss 0.5498 lr 8.69e-05 elapsed 115.6m eta 2.32h
+iter 24200/40000 loss 0.5654 lr 8.67e-05 elapsed 116.0m eta 2.31h
+iter 24250/40000 loss 0.5585 lr 8.64e-05 elapsed 116.4m eta 2.31h
+iter 24300/40000 loss 0.5259 lr 8.62e-05 elapsed 117.2m eta 2.31h
+iter 24350/40000 loss 0.5579 lr 8.60e-05 elapsed 117.9m eta 2.30h
+iter 24400/40000 loss 0.5681 lr 8.57e-05 elapsed 118.3m eta 2.30h
+iter 24450/40000 loss 0.5646 lr 8.55e-05 elapsed 118.7m eta 2.29h
+iter 24500/40000 loss 0.5418 lr 8.52e-05 elapsed 119.2m eta 2.28h
+iter 24550/40000 loss 0.5227 lr 8.50e-05 elapsed 119.6m eta 2.27h
+iter 24600/40000 loss 0.5320 lr 8.47e-05 elapsed 120.0m eta 2.27h
+iter 24650/40000 loss 0.5522 lr 8.45e-05 elapsed 120.5m eta 2.26h
+iter 24700/40000 loss 0.5398 lr 8.42e-05 elapsed 120.9m eta 2.25h
+iter 24750/40000 loss 0.5300 lr 8.40e-05 elapsed 121.3m eta 2.24h
+iter 24800/40000 loss 0.5524 lr 8.37e-05 elapsed 121.8m eta 2.24h
+iter 24850/40000 loss 0.5531 lr 8.35e-05 elapsed 122.2m eta 2.23h
+iter 24900/40000 loss 0.5469 lr 8.32e-05 elapsed 122.6m eta 2.22h
+iter 24950/40000 loss 0.5126 lr 8.30e-05 elapsed 123.1m eta 2.21h
+iter 25000/40000 loss 0.5403 lr 8.27e-05 elapsed 123.5m eta 2.21h
+iter 25050/40000 loss 0.5287 lr 8.25e-05 elapsed 123.9m eta 2.20h
+iter 25100/40000 loss 0.5305 lr 8.22e-05 elapsed 124.4m eta 2.19h
+iter 25150/40000 loss 0.5210 lr 8.20e-05 elapsed 124.8m eta 2.18h
+iter 25200/40000 loss 0.5415 lr 8.17e-05 elapsed 125.2m eta 2.18h
+iter 25250/40000 loss 0.5167 lr 8.15e-05 elapsed 125.6m eta 2.17h
+iter 25300/40000 loss 0.5305 lr 8.12e-05 elapsed 126.1m eta 2.16h
+iter 25350/40000 loss 0.5289 lr 8.10e-05 elapsed 126.5m eta 2.15h
+iter 25400/40000 loss 0.5461 lr 8.07e-05 elapsed 126.9m eta 2.14h
+iter 25450/40000 loss 0.5314 lr 8.05e-05 elapsed 127.4m eta 2.14h
+iter 25500/40000 loss 0.5461 lr 8.02e-05 elapsed 127.8m eta 2.13h
+iter 25550/40000 loss 0.5381 lr 8.00e-05 elapsed 128.2m eta 2.12h
+iter 25600/40000 loss 0.5287 lr 7.97e-05 elapsed 128.7m eta 2.12h
+iter 25650/40000 loss 0.5423 lr 7.95e-05 elapsed 129.1m eta 2.11h
+iter 25700/40000 loss 0.5199 lr 7.93e-05 elapsed 129.5m eta 2.10h
+iter 25750/40000 loss 0.5362 lr 7.90e-05 elapsed 130.0m eta 2.09h
+iter 25800/40000 loss 0.5345 lr 7.88e-05 elapsed 130.4m eta 2.08h
+iter 25850/40000 loss 0.5603 lr 7.85e-05 elapsed 130.8m eta 2.08h
+iter 25900/40000 loss 0.5256 lr 7.83e-05 elapsed 131.2m eta 2.07h
+iter 25950/40000 loss 0.5274 lr 7.80e-05 elapsed 131.7m eta 2.06h
+iter 26000/40000 loss 0.5358 lr 7.78e-05 elapsed 132.1m eta 2.05h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 26000] mIoU 35.80 aAcc 79.57 mAcc 49.50 (500 images)
+iter 26050/40000 loss 0.5270 lr 7.75e-05 elapsed 132.8m eta 2.05h
+iter 26100/40000 loss 0.5222 lr 7.73e-05 elapsed 133.2m eta 2.04h
+iter 26150/40000 loss 0.5203 lr 7.70e-05 elapsed 133.6m eta 2.04h
+iter 26200/40000 loss 0.5222 lr 7.68e-05 elapsed 134.1m eta 2.03h
+iter 26250/40000 loss 0.5451 lr 7.65e-05 elapsed 134.5m eta 2.02h
+iter 26300/40000 loss 0.5145 lr 7.63e-05 elapsed 134.9m eta 2.01h
+iter 26350/40000 loss 0.5037 lr 7.60e-05 elapsed 135.4m eta 2.01h
+iter 26400/40000 loss 0.5230 lr 7.58e-05 elapsed 135.8m eta 2.00h
+iter 26450/40000 loss 0.5182 lr 7.55e-05 elapsed 136.2m eta 1.99h
+iter 26500/40000 loss 0.5136 lr 7.52e-05 elapsed 136.6m eta 1.98h
+iter 26550/40000 loss 0.5366 lr 7.50e-05 elapsed 137.1m eta 1.98h
+iter 26600/40000 loss 0.5358 lr 7.47e-05 elapsed 137.5m eta 1.97h
+iter 26650/40000 loss 0.5117 lr 7.45e-05 elapsed 137.9m eta 1.96h
+iter 26700/40000 loss 0.5150 lr 7.42e-05 elapsed 138.4m eta 1.95h
+iter 26750/40000 loss 0.5197 lr 7.40e-05 elapsed 138.8m eta 1.95h
+iter 26800/40000 loss 0.5174 lr 7.37e-05 elapsed 139.2m eta 1.94h
+iter 26850/40000 loss 0.5026 lr 7.35e-05 elapsed 139.7m eta 1.93h
+iter 26900/40000 loss 0.5111 lr 7.32e-05 elapsed 140.1m eta 1.92h
+iter 26950/40000 loss 0.5022 lr 7.30e-05 elapsed 140.5m eta 1.92h
+iter 27000/40000 loss 0.5186 lr 7.27e-05 elapsed 141.0m eta 1.91h
+iter 27050/40000 loss 0.5081 lr 7.25e-05 elapsed 141.4m eta 1.90h
+iter 27100/40000 loss 0.5021 lr 7.22e-05 elapsed 141.8m eta 1.89h
+iter 27150/40000 loss 0.5126 lr 7.20e-05 elapsed 142.2m eta 1.89h
+iter 27200/40000 loss 0.5228 lr 7.17e-05 elapsed 142.7m eta 1.88h
+iter 27250/40000 loss 0.5014 lr 7.15e-05 elapsed 143.1m eta 1.87h
+iter 27300/40000 loss 0.5027 lr 7.12e-05 elapsed 143.5m eta 1.86h
+iter 27350/40000 loss 0.5235 lr 7.10e-05 elapsed 144.0m eta 1.86h
+iter 27400/40000 loss 0.5231 lr 7.07e-05 elapsed 144.4m eta 1.85h
+iter 27450/40000 loss 0.5218 lr 7.05e-05 elapsed 144.8m eta 1.84h
+iter 27500/40000 loss 0.4939 lr 7.02e-05 elapsed 145.3m eta 1.83h
+iter 27550/40000 loss 0.4966 lr 7.00e-05 elapsed 145.7m eta 1.83h
+iter 27600/40000 loss 0.5174 lr 6.97e-05 elapsed 146.1m eta 1.82h
+iter 27650/40000 loss 0.5062 lr 6.95e-05 elapsed 146.6m eta 1.81h
+iter 27700/40000 loss 0.5132 lr 6.92e-05 elapsed 147.0m eta 1.80h
+iter 27750/40000 loss 0.5228 lr 6.89e-05 elapsed 147.4m eta 1.80h
+iter 27800/40000 loss 0.5155 lr 6.87e-05 elapsed 147.8m eta 1.79h
+iter 27850/40000 loss 0.5068 lr 6.84e-05 elapsed 148.3m eta 1.78h
+iter 27900/40000 loss 0.5185 lr 6.82e-05 elapsed 148.7m eta 1.77h
+iter 27950/40000 loss 0.4978 lr 6.79e-05 elapsed 149.1m eta 1.77h
+iter 28000/40000 loss 0.4960 lr 6.77e-05 elapsed 149.6m eta 1.76h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 28000] mIoU 36.16 aAcc 79.76 mAcc 50.07 (500 images)
+iter 28050/40000 loss 0.5007 lr 6.74e-05 elapsed 150.2m eta 1.75h
+iter 28100/40000 loss 0.4893 lr 6.72e-05 elapsed 150.7m eta 1.75h
+iter 28150/40000 loss 0.4894 lr 6.69e-05 elapsed 151.1m eta 1.74h
+iter 28200/40000 loss 0.4840 lr 6.67e-05 elapsed 151.5m eta 1.73h
+iter 28250/40000 loss 0.5118 lr 6.64e-05 elapsed 152.0m eta 1.73h
+iter 28300/40000 loss 0.5160 lr 6.62e-05 elapsed 152.4m eta 1.72h
+iter 28350/40000 loss 0.5081 lr 6.59e-05 elapsed 152.8m eta 1.71h
+iter 28400/40000 loss 0.5039 lr 6.56e-05 elapsed 153.2m eta 1.70h
+iter 28450/40000 loss 0.5283 lr 6.54e-05 elapsed 153.7m eta 1.70h
+iter 28500/40000 loss 0.5071 lr 6.51e-05 elapsed 154.1m eta 1.69h
+iter 28550/40000 loss 0.5112 lr 6.49e-05 elapsed 154.5m eta 1.68h
+iter 28600/40000 loss 0.4887 lr 6.46e-05 elapsed 155.0m eta 1.67h
+iter 28650/40000 loss 0.5012 lr 6.44e-05 elapsed 155.4m eta 1.67h
+iter 28700/40000 loss 0.4968 lr 6.41e-05 elapsed 155.8m eta 1.66h
+iter 28750/40000 loss 0.5074 lr 6.39e-05 elapsed 156.3m eta 1.65h
+iter 28800/40000 loss 0.4810 lr 6.36e-05 elapsed 156.7m eta 1.64h
+iter 28850/40000 loss 0.5041 lr 6.34e-05 elapsed 157.1m eta 1.64h
+iter 28900/40000 loss 0.5083 lr 6.31e-05 elapsed 157.6m eta 1.63h
+iter 28950/40000 loss 0.4912 lr 6.28e-05 elapsed 158.0m eta 1.62h
+iter 29000/40000 loss 0.5073 lr 6.26e-05 elapsed 158.4m eta 1.61h
+iter 29050/40000 loss 0.4994 lr 6.23e-05 elapsed 158.8m eta 1.61h
+iter 29100/40000 loss 0.4977 lr 6.21e-05 elapsed 159.3m eta 1.60h
+iter 29150/40000 loss 0.5154 lr 6.18e-05 elapsed 159.7m eta 1.59h
+iter 29200/40000 loss 0.4894 lr 6.16e-05 elapsed 160.1m eta 1.58h
+iter 29250/40000 loss 0.5079 lr 6.13e-05 elapsed 160.6m eta 1.58h
+iter 29300/40000 loss 0.5169 lr 6.10e-05 elapsed 161.0m eta 1.57h
+iter 29350/40000 loss 0.4914 lr 6.08e-05 elapsed 161.4m eta 1.56h
+iter 29400/40000 loss 0.5034 lr 6.05e-05 elapsed 161.9m eta 1.55h
+iter 29450/40000 loss 0.4838 lr 6.03e-05 elapsed 162.3m eta 1.55h
+iter 29500/40000 loss 0.5030 lr 6.00e-05 elapsed 162.7m eta 1.54h
+iter 29550/40000 loss 0.5066 lr 5.98e-05 elapsed 163.2m eta 1.53h
+iter 29600/40000 loss 0.4978 lr 5.95e-05 elapsed 163.6m eta 1.52h
+iter 29650/40000 loss 0.4794 lr 5.92e-05 elapsed 164.0m eta 1.52h
+iter 29700/40000 loss 0.5037 lr 5.90e-05 elapsed 164.4m eta 1.51h
+iter 29750/40000 loss 0.4947 lr 5.87e-05 elapsed 164.9m eta 1.50h
+iter 29800/40000 loss 0.4952 lr 5.85e-05 elapsed 165.3m eta 1.49h
+iter 29850/40000 loss 0.5019 lr 5.82e-05 elapsed 165.7m eta 1.49h
+iter 29900/40000 loss 0.5010 lr 5.80e-05 elapsed 166.2m eta 1.48h
+iter 29950/40000 loss 0.5051 lr 5.77e-05 elapsed 166.6m eta 1.47h
+iter 30000/40000 loss 0.4962 lr 5.74e-05 elapsed 167.0m eta 1.47h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 30000] mIoU 36.73 aAcc 80.01 mAcc 50.81 (500 images)
+iter 30050/40000 loss 0.4773 lr 5.72e-05 elapsed 167.7m eta 1.46h
+iter 30100/40000 loss 0.4652 lr 5.69e-05 elapsed 168.1m eta 1.45h
+iter 30150/40000 loss 0.4955 lr 5.67e-05 elapsed 168.6m eta 1.44h
+iter 30200/40000 loss 0.4809 lr 5.64e-05 elapsed 169.0m eta 1.44h
+iter 30250/40000 loss 0.4962 lr 5.61e-05 elapsed 169.4m eta 1.43h
+iter 30300/40000 loss 0.5105 lr 5.59e-05 elapsed 169.8m eta 1.42h
+iter 30350/40000 loss 0.4758 lr 5.56e-05 elapsed 170.3m eta 1.42h
+iter 30400/40000 loss 0.5061 lr 5.54e-05 elapsed 170.7m eta 1.41h
+iter 30450/40000 loss 0.4971 lr 5.51e-05 elapsed 171.1m eta 1.40h
+iter 30500/40000 loss 0.4967 lr 5.48e-05 elapsed 171.6m eta 1.39h
+iter 30550/40000 loss 0.4777 lr 5.46e-05 elapsed 172.0m eta 1.39h
+iter 30600/40000 loss 0.5002 lr 5.43e-05 elapsed 172.4m eta 1.38h
+iter 30650/40000 loss 0.4781 lr 5.41e-05 elapsed 172.9m eta 1.37h
+iter 30700/40000 loss 0.4783 lr 5.38e-05 elapsed 173.3m eta 1.36h
+iter 30750/40000 loss 0.4843 lr 5.35e-05 elapsed 173.7m eta 1.36h
+iter 30800/40000 loss 0.4709 lr 5.33e-05 elapsed 174.2m eta 1.35h
+iter 30850/40000 loss 0.4807 lr 5.30e-05 elapsed 174.6m eta 1.34h
+iter 30900/40000 loss 0.4700 lr 5.28e-05 elapsed 175.0m eta 1.33h
+iter 30950/40000 loss 0.4749 lr 5.25e-05 elapsed 175.4m eta 1.33h
+iter 31000/40000 loss 0.4879 lr 5.22e-05 elapsed 175.9m eta 1.32h
+iter 31050/40000 loss 0.4785 lr 5.20e-05 elapsed 176.3m eta 1.31h
+iter 31100/40000 loss 0.4805 lr 5.17e-05 elapsed 176.7m eta 1.30h
+iter 31150/40000 loss 0.4778 lr 5.15e-05 elapsed 177.2m eta 1.30h
+iter 31200/40000 loss 0.4917 lr 5.12e-05 elapsed 177.6m eta 1.29h
+iter 31250/40000 loss 0.4831 lr 5.09e-05 elapsed 178.0m eta 1.28h
+iter 31300/40000 loss 0.4856 lr 5.07e-05 elapsed 178.5m eta 1.27h
+iter 31350/40000 loss 0.4794 lr 5.04e-05 elapsed 178.9m eta 1.27h
+iter 31400/40000 loss 0.4895 lr 5.01e-05 elapsed 179.3m eta 1.26h
+iter 31450/40000 loss 0.4900 lr 4.99e-05 elapsed 179.7m eta 1.25h
+iter 31500/40000 loss 0.4939 lr 4.96e-05 elapsed 180.2m eta 1.25h
+iter 31550/40000 loss 0.4694 lr 4.94e-05 elapsed 180.6m eta 1.24h
+iter 31600/40000 loss 0.4767 lr 4.91e-05 elapsed 181.0m eta 1.23h
+iter 31650/40000 loss 0.5037 lr 4.88e-05 elapsed 181.5m eta 1.22h
+iter 31700/40000 loss 0.4776 lr 4.86e-05 elapsed 181.9m eta 1.22h
+iter 31750/40000 loss 0.4734 lr 4.83e-05 elapsed 182.3m eta 1.21h
+iter 31800/40000 loss 0.4645 lr 4.80e-05 elapsed 182.8m eta 1.20h
+iter 31850/40000 loss 0.4757 lr 4.78e-05 elapsed 183.2m eta 1.19h
+iter 31900/40000 loss 0.4859 lr 4.75e-05 elapsed 183.6m eta 1.19h
+iter 31950/40000 loss 0.4658 lr 4.73e-05 elapsed 184.1m eta 1.18h
+iter 32000/40000 loss 0.4720 lr 4.70e-05 elapsed 184.5m eta 1.17h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 32000] mIoU 36.71 aAcc 80.27 mAcc 51.08 (500 images)
+iter 32050/40000 loss 0.4702 lr 4.67e-05 elapsed 185.2m eta 1.17h
+iter 32100/40000 loss 0.4870 lr 4.65e-05 elapsed 185.6m eta 1.16h
+iter 32150/40000 loss 0.4673 lr 4.62e-05 elapsed 186.0m eta 1.15h
+iter 32200/40000 loss 0.4788 lr 4.59e-05 elapsed 186.4m eta 1.14h
+iter 32250/40000 loss 0.4746 lr 4.57e-05 elapsed 186.9m eta 1.14h
+iter 32300/40000 loss 0.4951 lr 4.54e-05 elapsed 187.3m eta 1.13h
+iter 32350/40000 loss 0.4543 lr 4.51e-05 elapsed 187.7m eta 1.12h
+iter 32400/40000 loss 0.4812 lr 4.49e-05 elapsed 188.2m eta 1.11h
+iter 32450/40000 loss 0.4773 lr 4.46e-05 elapsed 188.6m eta 1.11h
+iter 32500/40000 loss 0.4853 lr 4.43e-05 elapsed 189.0m eta 1.10h
+iter 32550/40000 loss 0.4866 lr 4.41e-05 elapsed 189.5m eta 1.09h
+iter 32600/40000 loss 0.4660 lr 4.38e-05 elapsed 189.9m eta 1.08h
+iter 32650/40000 loss 0.4424 lr 4.35e-05 elapsed 190.3m eta 1.08h
+iter 32700/40000 loss 0.4874 lr 4.33e-05 elapsed 190.8m eta 1.07h
+iter 32750/40000 loss 0.4504 lr 4.30e-05 elapsed 191.2m eta 1.06h
+iter 32800/40000 loss 0.4346 lr 4.27e-05 elapsed 191.6m eta 1.05h
+iter 32850/40000 loss 0.4681 lr 4.25e-05 elapsed 192.0m eta 1.05h
+iter 32900/40000 loss 0.4918 lr 4.22e-05 elapsed 192.5m eta 1.04h
+iter 32950/40000 loss 0.4669 lr 4.19e-05 elapsed 192.9m eta 1.03h
+iter 33000/40000 loss 0.4957 lr 4.17e-05 elapsed 193.3m eta 1.03h
+iter 33050/40000 loss 0.4621 lr 4.14e-05 elapsed 193.8m eta 1.02h
+iter 33100/40000 loss 0.4656 lr 4.11e-05 elapsed 194.2m eta 1.01h
+iter 33150/40000 loss 0.4596 lr 4.09e-05 elapsed 194.6m eta 1.00h
+iter 33200/40000 loss 0.4603 lr 4.06e-05 elapsed 195.1m eta 1.00h
+iter 33250/40000 loss 0.4551 lr 4.03e-05 elapsed 195.5m eta 0.99h
+iter 33300/40000 loss 0.4806 lr 4.01e-05 elapsed 195.9m eta 0.98h
+iter 33350/40000 loss 0.4707 lr 3.98e-05 elapsed 196.3m eta 0.97h
+iter 33400/40000 loss 0.4458 lr 3.95e-05 elapsed 196.8m eta 0.97h
+iter 33450/40000 loss 0.4714 lr 3.93e-05 elapsed 197.2m eta 0.96h
+iter 33500/40000 loss 0.4816 lr 3.90e-05 elapsed 197.6m eta 0.95h
+iter 33550/40000 loss 0.4660 lr 3.87e-05 elapsed 198.1m eta 0.94h
+iter 33600/40000 loss 0.4611 lr 3.84e-05 elapsed 198.5m eta 0.94h
+iter 33650/40000 loss 0.4686 lr 3.82e-05 elapsed 198.9m eta 0.93h
+iter 33700/40000 loss 0.4462 lr 3.79e-05 elapsed 199.4m eta 0.92h
+iter 33750/40000 loss 0.4687 lr 3.76e-05 elapsed 199.8m eta 0.91h
+iter 33800/40000 loss 0.4654 lr 3.74e-05 elapsed 200.2m eta 0.91h
+iter 33850/40000 loss 0.4579 lr 3.71e-05 elapsed 200.7m eta 0.90h
+iter 33900/40000 loss 0.4573 lr 3.68e-05 elapsed 201.1m eta 0.89h
+iter 33950/40000 loss 0.4532 lr 3.65e-05 elapsed 201.5m eta 0.89h
+iter 34000/40000 loss 0.4725 lr 3.63e-05 elapsed 201.9m eta 0.88h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 34000] mIoU 36.84 aAcc 80.19 mAcc 50.73 (500 images)
+iter 34050/40000 loss 0.4460 lr 3.60e-05 elapsed 202.6m eta 0.87h
+iter 34100/40000 loss 0.4728 lr 3.57e-05 elapsed 203.0m eta 0.86h
+iter 34150/40000 loss 0.4570 lr 3.55e-05 elapsed 203.5m eta 0.86h
+iter 34200/40000 loss 0.4536 lr 3.52e-05 elapsed 203.9m eta 0.85h
+iter 34250/40000 loss 0.4546 lr 3.49e-05 elapsed 204.3m eta 0.84h
+iter 34300/40000 loss 0.4542 lr 3.46e-05 elapsed 204.8m eta 0.83h
+iter 34350/40000 loss 0.4684 lr 3.44e-05 elapsed 205.2m eta 0.83h
+iter 34400/40000 loss 0.4613 lr 3.41e-05 elapsed 205.6m eta 0.82h
+iter 34450/40000 loss 0.4482 lr 3.38e-05 elapsed 206.1m eta 0.81h
+iter 34500/40000 loss 0.4630 lr 3.35e-05 elapsed 206.5m eta 0.81h
+iter 34550/40000 loss 0.4624 lr 3.33e-05 elapsed 206.9m eta 0.80h
+iter 34600/40000 loss 0.4582 lr 3.30e-05 elapsed 207.3m eta 0.79h
+iter 34650/40000 loss 0.4545 lr 3.27e-05 elapsed 207.8m eta 0.78h
+iter 34700/40000 loss 0.4619 lr 3.24e-05 elapsed 208.2m eta 0.78h
+iter 34750/40000 loss 0.4577 lr 3.22e-05 elapsed 208.6m eta 0.77h
+iter 34800/40000 loss 0.4524 lr 3.19e-05 elapsed 209.1m eta 0.76h
+iter 34850/40000 loss 0.4573 lr 3.16e-05 elapsed 209.5m eta 0.75h
+iter 34900/40000 loss 0.4585 lr 3.13e-05 elapsed 209.9m eta 0.75h
+iter 34950/40000 loss 0.4452 lr 3.11e-05 elapsed 210.4m eta 0.74h
+iter 35000/40000 loss 0.4534 lr 3.08e-05 elapsed 210.8m eta 0.73h
+iter 35050/40000 loss 0.4358 lr 3.05e-05 elapsed 211.2m eta 0.72h
+iter 35100/40000 loss 0.4519 lr 3.02e-05 elapsed 211.7m eta 0.72h
+iter 35150/40000 loss 0.4640 lr 3.00e-05 elapsed 212.1m eta 0.71h
+iter 35200/40000 loss 0.4579 lr 2.97e-05 elapsed 212.5m eta 0.70h
+iter 35250/40000 loss 0.4423 lr 2.94e-05 elapsed 212.9m eta 0.70h
+iter 35300/40000 loss 0.4399 lr 2.91e-05 elapsed 213.4m eta 0.69h
+iter 35350/40000 loss 0.4631 lr 2.88e-05 elapsed 213.8m eta 0.68h
+iter 35400/40000 loss 0.4558 lr 2.86e-05 elapsed 214.2m eta 0.67h
+iter 35450/40000 loss 0.4537 lr 2.83e-05 elapsed 214.7m eta 0.67h
+iter 35500/40000 loss 0.4470 lr 2.80e-05 elapsed 215.1m eta 0.66h
+iter 35550/40000 loss 0.4525 lr 2.77e-05 elapsed 215.5m eta 0.65h
+iter 35600/40000 loss 0.4441 lr 2.74e-05 elapsed 216.0m eta 0.64h
+iter 35650/40000 loss 0.4413 lr 2.72e-05 elapsed 216.4m eta 0.64h
+iter 35700/40000 loss 0.4516 lr 2.69e-05 elapsed 216.8m eta 0.63h
+iter 35750/40000 loss 0.4515 lr 2.66e-05 elapsed 217.3m eta 0.62h
+iter 35800/40000 loss 0.4511 lr 2.63e-05 elapsed 217.7m eta 0.61h
+iter 35850/40000 loss 0.4389 lr 2.60e-05 elapsed 218.1m eta 0.61h
+iter 35900/40000 loss 0.4325 lr 2.57e-05 elapsed 218.6m eta 0.60h
+iter 35950/40000 loss 0.4658 lr 2.55e-05 elapsed 219.0m eta 0.59h
+iter 36000/40000 loss 0.4344 lr 2.52e-05 elapsed 219.4m eta 0.59h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 36000] mIoU 37.79 aAcc 80.42 mAcc 51.73 (500 images)
+iter 36050/40000 loss 0.4348 lr 2.49e-05 elapsed 220.1m eta 0.58h
+iter 36100/40000 loss 0.4458 lr 2.46e-05 elapsed 220.5m eta 0.57h
+iter 36150/40000 loss 0.4433 lr 2.43e-05 elapsed 220.9m eta 0.56h
+iter 36200/40000 loss 0.4547 lr 2.40e-05 elapsed 221.4m eta 0.56h
+iter 36250/40000 loss 0.4443 lr 2.38e-05 elapsed 221.8m eta 0.55h
+iter 36300/40000 loss 0.4470 lr 2.35e-05 elapsed 222.2m eta 0.54h
+iter 36350/40000 loss 0.4442 lr 2.32e-05 elapsed 222.7m eta 0.53h
+iter 36400/40000 loss 0.4477 lr 2.29e-05 elapsed 223.1m eta 0.53h
+iter 36450/40000 loss 0.4631 lr 2.26e-05 elapsed 223.5m eta 0.52h
+iter 36500/40000 loss 0.4557 lr 2.23e-05 elapsed 224.0m eta 0.51h
+iter 36550/40000 loss 0.4299 lr 2.20e-05 elapsed 224.4m eta 0.51h
+iter 36600/40000 loss 0.4367 lr 2.18e-05 elapsed 224.8m eta 0.50h
+iter 36650/40000 loss 0.4460 lr 2.15e-05 elapsed 225.3m eta 0.49h
+iter 36700/40000 loss 0.4611 lr 2.12e-05 elapsed 225.7m eta 0.48h
+iter 36750/40000 loss 0.4516 lr 2.09e-05 elapsed 226.1m eta 0.48h
+iter 36800/40000 loss 0.4573 lr 2.06e-05 elapsed 226.5m eta 0.47h
+iter 36850/40000 loss 0.4310 lr 2.03e-05 elapsed 227.0m eta 0.46h
+iter 36900/40000 loss 0.4375 lr 2.00e-05 elapsed 227.4m eta 0.45h
+iter 36950/40000 loss 0.4342 lr 1.97e-05 elapsed 227.8m eta 0.45h
+iter 37000/40000 loss 0.4434 lr 1.94e-05 elapsed 228.3m eta 0.44h
+iter 37050/40000 loss 0.4339 lr 1.91e-05 elapsed 228.7m eta 0.43h
+iter 37100/40000 loss 0.4368 lr 1.89e-05 elapsed 229.1m eta 0.42h
+iter 37150/40000 loss 0.4481 lr 1.86e-05 elapsed 229.6m eta 0.42h
+iter 37200/40000 loss 0.4226 lr 1.83e-05 elapsed 230.0m eta 0.41h
+iter 37250/40000 loss 0.4375 lr 1.80e-05 elapsed 230.4m eta 0.40h
+iter 37300/40000 loss 0.4539 lr 1.77e-05 elapsed 230.9m eta 0.39h
+iter 37350/40000 loss 0.4437 lr 1.74e-05 elapsed 231.3m eta 0.39h
+iter 37400/40000 loss 0.4512 lr 1.71e-05 elapsed 231.7m eta 0.38h
+iter 37450/40000 loss 0.4465 lr 1.68e-05 elapsed 232.1m eta 0.37h
+iter 37500/40000 loss 0.4353 lr 1.65e-05 elapsed 232.6m eta 0.37h
+iter 37550/40000 loss 0.4476 lr 1.62e-05 elapsed 233.0m eta 0.36h
+iter 37600/40000 loss 0.4315 lr 1.59e-05 elapsed 233.4m eta 0.35h
+iter 37650/40000 loss 0.4302 lr 1.56e-05 elapsed 233.9m eta 0.34h
+iter 37700/40000 loss 0.4433 lr 1.53e-05 elapsed 234.3m eta 0.34h
+iter 37750/40000 loss 0.4401 lr 1.50e-05 elapsed 234.7m eta 0.33h
+iter 37800/40000 loss 0.4483 lr 1.47e-05 elapsed 235.2m eta 0.32h
+iter 37850/40000 loss 0.4462 lr 1.44e-05 elapsed 235.6m eta 0.31h
+iter 37900/40000 loss 0.4511 lr 1.41e-05 elapsed 236.0m eta 0.31h
+iter 37950/40000 loss 0.4348 lr 1.38e-05 elapsed 236.5m eta 0.30h
+iter 38000/40000 loss 0.4451 lr 1.35e-05 elapsed 236.9m eta 0.29h
+evaluating on 500 val images...
+  eval 250/500 (7s)
+[eval @ 38000] mIoU 37.54 aAcc 80.25 mAcc 51.10 (500 images)
+iter 38050/40000 loss 0.4408 lr 1.32e-05 elapsed 237.6m eta 0.29h
+iter 38100/40000 loss 0.4151 lr 1.29e-05 elapsed 238.0m eta 0.28h
+iter 38150/40000 loss 0.4317 lr 1.26e-05 elapsed 238.4m eta 0.27h
+iter 38200/40000 loss 0.4377 lr 1.23e-05 elapsed 238.9m eta 0.26h
+iter 38250/40000 loss 0.4384 lr 1.20e-05 elapsed 239.3m eta 0.26h
+iter 38300/40000 loss 0.4319 lr 1.17e-05 elapsed 239.7m eta 0.25h
+iter 38350/40000 loss 0.4337 lr 1.14e-05 elapsed 240.1m eta 0.24h
+iter 38400/40000 loss 0.4417 lr 1.10e-05 elapsed 240.6m eta 0.23h
+iter 38450/40000 loss 0.4353 lr 1.07e-05 elapsed 241.0m eta 0.23h
+iter 38500/40000 loss 0.4418 lr 1.04e-05 elapsed 241.4m eta 0.22h
+iter 38550/40000 loss 0.4441 lr 1.01e-05 elapsed 241.9m eta 0.21h
+iter 38600/40000 loss 0.4329 lr 9.79e-06 elapsed 242.3m eta 0.20h
+iter 38650/40000 loss 0.4310 lr 9.48e-06 elapsed 242.7m eta 0.20h
+iter 38700/40000 loss 0.4178 lr 9.16e-06 elapsed 243.2m eta 0.19h
+iter 38750/40000 loss 0.4365 lr 8.85e-06 elapsed 243.6m eta 0.18h
+iter 38800/40000 loss 0.4279 lr 8.53e-06 elapsed 244.0m eta 0.18h
+iter 38850/40000 loss 0.4270 lr 8.21e-06 elapsed 244.5m eta 0.17h
+iter 38900/40000 loss 0.4321 lr 7.88e-06 elapsed 244.9m eta 0.16h
+iter 38950/40000 loss 0.4279 lr 7.56e-06 elapsed 245.3m eta 0.15h
+iter 39000/40000 loss 0.4266 lr 7.24e-06 elapsed 245.8m eta 0.15h
+iter 39050/40000 loss 0.4256 lr 6.91e-06 elapsed 246.2m eta 0.14h
+iter 39100/40000 loss 0.4330 lr 6.58e-06 elapsed 246.6m eta 0.13h
+iter 39150/40000 loss 0.4280 lr 6.25e-06 elapsed 247.1m eta 0.12h
+iter 39200/40000 loss 0.4197 lr 5.92e-06 elapsed 247.5m eta 0.12h
+iter 39250/40000 loss 0.4424 lr 5.59e-06 elapsed 247.9m eta 0.11h
+iter 39300/40000 loss 0.4157 lr 5.25e-06 elapsed 248.3m eta 0.10h
+iter 39350/40000 loss 0.4464 lr 4.91e-06 elapsed 248.8m eta 0.10h
+iter 39400/40000 loss 0.4415 lr 4.57e-06 elapsed 249.2m eta 0.09h
+iter 39450/40000 loss 0.4313 lr 4.23e-06 elapsed 249.6m eta 0.08h
+iter 39500/40000 loss 0.4349 lr 3.88e-06 elapsed 250.1m eta 0.07h
+iter 39550/40000 loss 0.4340 lr 3.53e-06 elapsed 250.5m eta 0.07h
+iter 39600/40000 loss 0.4219 lr 3.18e-06 elapsed 250.9m eta 0.06h
+iter 39650/40000 loss 0.4358 lr 2.82e-06 elapsed 251.4m eta 0.05h
+iter 39700/40000 loss 0.4446 lr 2.45e-06 elapsed 251.8m eta 0.04h
+iter 39750/40000 loss 0.4469 lr 2.08e-06 elapsed 252.2m eta 0.04h
+iter 39800/40000 loss 0.4470 lr 1.71e-06 elapsed 252.6m eta 0.03h
+iter 39850/40000 loss 0.4310 lr 1.32e-06 elapsed 253.1m eta 0.02h
+iter 39900/40000 loss 0.4391 lr 9.18e-07 elapsed 253.5m eta 0.01h
+iter 39950/40000 loss 0.4159 lr 4.97e-07 elapsed 253.9m eta 0.01h
+iter 40000/40000 loss 0.4427 lr 1.44e-08 elapsed 254.4m eta 0.00h
+evaluating on 2000 val images...
+  eval 250/2000 (8s)
+  eval 500/2000 (15s)
+  eval 750/2000 (23s)
+  eval 1000/2000 (30s)
+  eval 1250/2000 (37s)
+  eval 1500/2000 (43s)
+  eval 1750/2000 (50s)
+[eval @ 40000] mIoU 42.91 aAcc 80.42 mAcc 54.80 (2000 images)
+done. best mIoU 42.91. checkpoints in runs/fastvit_sa12
