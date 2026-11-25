@@ -5,7 +5,7 @@ lr 2e-4, weight decay 1e-4, poly LR (power 0.9), 40k iterations.
 On a single GPU use --batch-size N --accum-steps M with N*M = 32 to keep the
 same effective batch, and reduce --iters if you are short on compute.
 
-Example (Colab / Kaggle, from the repo root):
+Example (from the repo root):
     python segmentation/train_seg.py --model fastvit_sa12 \
         --checkpoint https://docs-assets.developer.apple.com/ml-research/models/fastvit/image_classification_models/fastvit_sa12.pth.tar \
         --batch-size 8 --accum-steps 4 --iters 40000 --amp --output runs/sa12
@@ -57,7 +57,15 @@ def get_args():
     p.add_argument("--lr", type=float, default=2e-4)
     p.add_argument("--weight-decay", type=float, default=1e-4)
     p.add_argument("--warmup-iters", type=int, default=0)
-    p.add_argument("--drop-path", type=float, default=0.1)
+    p.add_argument("--drop-path", type=float, default=0.0,
+                   help="backbone stochastic depth (PoolFormer recipe: 0)")
+    p.add_argument("--no-decay-norm-bias", action="store_true",
+                   help="exclude norms, biases and layer-scale from weight "
+                   "decay (PoolFormer recipe decays all parameters)")
+    p.add_argument("--photometric", default="mmseg",
+                   choices=["mmseg", "jitter"],
+                   help="mmseg = exact PhotoMetricDistortion (paper), "
+                   "jitter = torchvision ColorJitter approximation")
     p.add_argument("--crop-size", type=int, default=512)
     p.add_argument("--amp", action="store_true", help="mixed precision")
     p.add_argument("--workers", type=int, default=4)
@@ -73,7 +81,7 @@ def get_args():
                    help="use a subset of train (for quick debugging)")
     p.add_argument("--log-interval", type=int, default=50)
     p.add_argument("--save-interval", type=int, default=500,
-                   help="save last.pth every N iters (for Colab disconnects)")
+                   help="save last.pth every N iters (for resuming)")
     p.add_argument("--resume", default=None, help="path to last.pth")
     p.add_argument("--cache-dir", default=None, help="HF datasets cache dir")
     p.add_argument("--seed", type=int, default=0)
@@ -161,15 +169,17 @@ def evaluate(model, dataset, device, amp=False, max_samples=None):
     }
 
 
-def param_groups(model, weight_decay):
+def param_groups(model, weight_decay, decay_all=True):
     """Split parameters into optimizer groups with and without weight decay.
 
-    Weight decay is not applied to 1-D parameters (norm weights, biases) or
-    layer-scale parameters.
+    With ``decay_all`` every parameter is decayed, as in the PoolFormer
+    recipe (no ``paramwise_cfg``). Otherwise weight decay is not applied to
+    1-D parameters (norm weights, biases) or layer-scale parameters.
 
     Args:
         model: Model whose trainable parameters are grouped.
         weight_decay: Weight decay of the decayed group.
+        decay_all: Decay every parameter. Default: ``True``
 
     Returns:
         List of two parameter-group dicts for ``torch.optim`` optimizers.
@@ -178,7 +188,8 @@ def param_groups(model, weight_decay):
     for name, p in model.named_parameters():
         if not p.requires_grad:
             continue
-        if p.ndim <= 1 or "layer_scale" in name or name.endswith(".gamma"):
+        if not decay_all and (p.ndim <= 1 or "layer_scale" in name
+                              or name.endswith(".gamma")):
             no_decay.append(p)
         else:
             decay.append(p)
@@ -221,6 +232,7 @@ def main():
     print(f"{args.model} + Semantic FPN: {n_params:.2f}M params")
 
     train_set = ADE20KSeg(load_hf_split("train", args.cache_dir), train=True,
+                          photometric=args.photometric,
                           crop_size=args.crop_size,
                           max_samples=args.train_samples)
     val_set = ADE20KSeg(load_hf_split("val", args.cache_dir), train=False)
@@ -230,7 +242,10 @@ def main():
                         persistent_workers=args.workers > 0)
     print(f"train images: {len(train_set)}, val images: {len(val_set)}")
 
-    opt = torch.optim.AdamW(param_groups(model, args.weight_decay), lr=args.lr)
+    opt = torch.optim.AdamW(
+        param_groups(model, args.weight_decay,
+                     decay_all=not args.no_decay_norm_bias),
+        lr=args.lr)
     scaler = torch.amp.GradScaler("cuda", enabled=args.amp and
                                   device.type == "cuda")
     start_it, best = 0, 0.0

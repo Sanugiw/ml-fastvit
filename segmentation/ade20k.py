@@ -86,18 +86,72 @@ def _rescale_keep_ratio(w: int, h: int, scale=(2048, 512)):
     return int(w * factor + 0.5), int(h * factor + 0.5)
 
 
+def _convert(x: np.ndarray, alpha: float = 1.0, beta: float = 0.0):
+    """Scale and shift a ``uint8`` array, clipping to ``[0, 255]``."""
+    return np.clip(x.astype(np.float32) * alpha + beta, 0, 255).astype(np.uint8)
+
+
+def photometric_distortion(img: np.ndarray, brightness_delta: int = 32,
+                           contrast_range=(0.5, 1.5),
+                           saturation_range=(0.5, 1.5),
+                           hue_delta: int = 18) -> np.ndarray:
+    """Port of mmseg's ``PhotoMetricDistortion`` with its default arguments.
+
+    Each step is applied with probability 0.5, in mmseg's order: brightness,
+    contrast (either here or last), saturation, hue, contrast. Hue is shifted
+    by ``randint(-hue_delta, hue_delta)`` OpenCV units (2 degrees each),
+    converted to PIL's 0-255 hue scale.
+
+    Args:
+        img: ``uint8`` RGB image of shape ``(H, W, 3)``.
+        brightness_delta: Maximum brightness shift. Default: ``32``
+        contrast_range: Range of the contrast factor. Default: ``(0.5, 1.5)``
+        saturation_range: Range of the saturation factor.
+            Default: ``(0.5, 1.5)``
+        hue_delta: Maximum hue shift in OpenCV units. Default: ``18``
+
+    Returns:
+        Distorted ``uint8`` RGB image.
+    """
+    def contrast(x):
+        if random.randint(0, 1):
+            return _convert(x, alpha=random.uniform(*contrast_range))
+        return x
+
+    if random.randint(0, 1):
+        img = _convert(img, beta=random.uniform(-brightness_delta,
+                                                brightness_delta))
+    contrast_first = random.randint(0, 1)
+    if contrast_first:
+        img = contrast(img)
+    hsv = np.array(Image.fromarray(img).convert("HSV"))
+    if random.randint(0, 1):
+        hsv[..., 1] = _convert(hsv[..., 1],
+                               alpha=random.uniform(*saturation_range))
+    if random.randint(0, 1):
+        shift = random.randint(-hue_delta, hue_delta - 1)  # np.randint range
+        shift = round(shift * 2 * 256 / 360)  # OpenCV units -> PIL units
+        hsv[..., 0] = (hsv[..., 0].astype(np.int64) + shift) % 256
+    img = np.array(Image.fromarray(hsv, "HSV").convert("RGB"))
+    if not contrast_first:
+        img = contrast(img)
+    return img
+
+
 class ADE20KSeg(Dataset):
     """ADE20K semantic segmentation dataset with mmseg-style transforms.
 
     Training samples: random rescale, random crop, horizontal flip,
     photometric distortion, normalization and padding to ``crop_size``.
-    Validation samples: keep-ratio resize and normalization of the image only;
+    Validation samples: keep-ratio resize (sides rounded to multiples of
+    ``size_divisor``) and normalization of the image only;
     the label is returned at its original resolution.
     """
 
     def __init__(self, hf_split, train: bool, crop_size: int = 512,
                  scale=(2048, 512), ratio_range=(0.5, 2.0),
-                 max_samples: int = None) -> None:
+                 max_samples: int = None, photometric: str = "mmseg",
+                 size_divisor: int = 32) -> None:
         """Build ADE20K dataset.
 
         Args:
@@ -110,7 +164,16 @@ class ADE20KSeg(Dataset):
                 ``scale`` during training. Default: ``(0.5, 2.0)``
             max_samples: Use only the first ``max_samples`` images. ``None``
                 uses all of them. Default: ``None``
+            photometric: Color augmentation for training. ``mmseg`` is an
+                exact port of mmseg's ``PhotoMetricDistortion`` (as in the
+                paper); ``jitter`` is the earlier torchvision ``ColorJitter``
+                approximation. Default: ``mmseg``
+            size_divisor: Validation images are resized so both sides are
+                multiples of this, as PoolFormer's ``AlignResize``. ``1``
+                disables it. Default: ``32``
         """
+        if photometric not in ("mmseg", "jitter"):
+            raise ValueError(f"Unknown photometric mode {photometric}")
         self.ds = hf_split
         self.n = len(hf_split) if max_samples is None else min(
             max_samples, len(hf_split))
@@ -118,7 +181,8 @@ class ADE20KSeg(Dataset):
         self.crop = crop_size
         self.scale = scale
         self.ratio_range = ratio_range
-        # ~ mmseg PhotoMetricDistortion
+        self.photometric = photometric
+        self.size_divisor = size_divisor
         self.jitter = ColorJitter(brightness=32 / 255, contrast=0.5,
                                   saturation=0.5, hue=18 / 360)
 
@@ -194,6 +258,9 @@ class ADE20KSeg(Dataset):
         else:
             scale = self.scale
         nw, nh = _rescale_keep_ratio(*img.size, scale)
+        if not self.train and self.size_divisor > 1:
+            d = self.size_divisor  # PoolFormer AlignResize
+            nw, nh = math.ceil(nw / d) * d, math.ceil(nh / d) * d
         img = img.resize((nw, nh), Image.BILINEAR)
 
         if self.train:
@@ -202,8 +269,11 @@ class ADE20KSeg(Dataset):
             img, lbl = self._random_crop(img, lbl)
             if random.random() < 0.5:
                 img, lbl = img[:, ::-1], lbl[:, ::-1]
-            img = np.asarray(self.jitter(Image.fromarray(
-                np.ascontiguousarray(img))))
+            img = np.ascontiguousarray(img)
+            if self.photometric == "mmseg":
+                img = photometric_distortion(img)
+            else:
+                img = np.asarray(self.jitter(Image.fromarray(img)))
             img = (img.astype(np.float32) / 255.0 - MEAN) / STD
             # pad to crop size (image 0, label ignore)
             h, w = lbl.shape

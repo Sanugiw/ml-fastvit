@@ -1,0 +1,8 @@
+# Local environment, weights and dataset cache
+.venv/
+checkpoints/
+cache/
+__pycache__/
+# Run outputs: keep metrics, logs and figures; model weights are too large
+runs/**/*.pth
+runs/debug*/

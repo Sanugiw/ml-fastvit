@@ -60,9 +60,34 @@ def build_backbone(variant: str, drop_path_rate: float = 0.0) -> nn.Module:
     # Call the constructor directly instead of timm.create_model: recent timm
     # versions ship their own (different) `fastvit_*` models under the same
     # names, so going through the registry is ambiguous.
-    return getattr(fastvit_lib, variant)(
+    backbone = getattr(fastvit_lib, variant)(
         fork_feat=True, drop_path_rate=drop_path_rate
     )
+    _fix_out_indices(backbone)
+    return backbone
+
+
+def _fix_out_indices(backbone: nn.Module) -> None:
+    """Fork features from the last module of every stage.
+
+    ``models/fastvit.py`` hard-codes ``out_indices = [0, 2, 4, 6]``. In the
+    SA/MA variants a RepCPE module sits before the last stage, so index 6 is
+    the RepCPE output and the final attention stage would be skipped. This
+    moves the output norm layers to the real stage positions
+    (``[0, 2, 4, 7]`` for SA/MA; T/S models are unchanged). Each norm keeps its
+    channel count, so only its name (``norm6`` -> ``norm7``) changes.
+
+    Args:
+        backbone: FastViT built with ``fork_feat=True``. Modified in place.
+    """
+    stages = [i for i, m in enumerate(backbone.network)
+              if isinstance(m, nn.Sequential)]
+    assert len(stages) == len(backbone.out_indices), stages
+    for old, new in zip(backbone.out_indices, stages):
+        if old != new:
+            setattr(backbone, f"norm{new}", getattr(backbone, f"norm{old}"))
+            delattr(backbone, f"norm{old}")
+    backbone.out_indices = stages
 
 
 def _read_state_dict(path_or_url: str) -> Dict[str, torch.Tensor]:
