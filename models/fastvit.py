@@ -784,10 +784,6 @@ class FastViT(nn.Module):
 
         # Build the main stages of the network architecture
         network = []
-        # Index (in self.network) of the last module of every stage. Used to
-        # fork features for dense prediction. Must be computed here because
-        # variants with positional embeddings (SA/MA) insert extra modules.
-        stage_out_indices = []
         for i in range(len(layers)):
             # Add position embeddings if requested
             if pos_embs[i] is not None:
@@ -812,7 +808,6 @@ class FastViT(nn.Module):
                 inference_mode=inference_mode,
             )
             network.append(stage)
-            stage_out_indices.append(len(network) - 1)
             if i >= len(layers) - 1:
                 break
 
@@ -833,9 +828,7 @@ class FastViT(nn.Module):
         # For segmentation and detection, extract intermediate output
         if self.fork_feat:
             # add a norm layer for each output
-            # Was hard-coded to [0, 2, 4, 6], which for SA/MA variants picks
-            # the RepCPE output instead of the last (attention) stage.
-            self.out_indices = stage_out_indices
+            self.out_indices = [0, 2, 4, 6]
             for i_emb, i_layer in enumerate(self.out_indices):
                 if i_emb == 0 and os.environ.get("FORK_LAST3", None):
                     """For RetinaNet, `start_level=1`. The first norm layer will not used.
